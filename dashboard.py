@@ -21,8 +21,6 @@ cbs_filepath = 'cbs_amsterdam_2021_clean.shp'
 line_number = None  # Assuming single line number is not needed for user input
 
 
-
-
 # Dashboarding
 
 # Streamlit interface
@@ -33,22 +31,6 @@ transport_type = st.selectbox(
     "Select Transport Type",
     (None, 'Bus', 'Tram', 'Night Bus')
 )
-
-# Display selected transport types
-#st.write("You selected the following transport types:", selected_transport_types)
-
-
-# # User input for transport type using checkboxes in horizontal layout
-# cols = st.columns(3)  # Adjust the number of columns
-
-# # Define transport types
-# transport_types = [None, 'Bus', 'Tram', 'Night Bus']
-
-# # Create checkboxes for transport types
-# selected_transport_types = []
-# for i, transport in enumerate(transport_types):
-#     if cols[i].checkbox(transport):  # Each transport type gets a column
-#         selected_transport_types.append(transport)
 
 
 # User input for line type 
