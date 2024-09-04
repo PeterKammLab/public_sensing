@@ -77,9 +77,9 @@ if st.button("Run Analysis"):
     #st.subheader("Transport and Population Map")
 
     
-    st.subheader("Comparison Plot")
+    #st.subheader("Comparison Plot")
     plot_comparison(average_stats)
-    st.image('comparison.png', use_column_width=True) # caption='Comparison Plot',
+    st.image('comparison.png', use_column_width=True, caption='for averages')
 
    #st.write("What are the new stats?")
     #st.write(merged_df)
