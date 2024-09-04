@@ -37,18 +37,37 @@ st.title("Public Transport Sensing")
 # Title for the transport type selection
 st.write("Select Your Transport Type")
 
-
 # User input for transport type using checkboxes in horizontal layout
 cols = st.columns(3)  # Adjust the number of columns
 
 # Define transport types
-transport_types = [None, 'Bus', 'Tram', 'Night Bus']
+transport_types = ['Bus', 'Tram', 'Night Bus']
 
-# Create checkboxes for transport types
-selected_transport_types = []
-for i, transport in enumerate(transport_types):
-    if cols[i].checkbox(transport):  # Each transport type gets a column
-        selected_transport_types.append(transport)
+# Ensure the transport types and columns align
+if len(transport_types) <= len(cols):
+    selected_transport_types = [transport for i, transport in enumerate(transport_types) if cols[i].checkbox(transport)]
+else:
+    selected_transport_types = []
+    for i, transport in enumerate(transport_types):
+        col_idx = i % len(cols)  # To handle more types than columns
+        if cols[col_idx].checkbox(transport):
+            selected_transport_types.append(transport)
+
+# Display selected transport types
+st.write("You selected the following transport types:", selected_transport_types)
+
+
+# # User input for transport type using checkboxes in horizontal layout
+# cols = st.columns(3)  # Adjust the number of columns
+
+# # Define transport types
+# transport_types = [None, 'Bus', 'Tram', 'Night Bus']
+
+# # Create checkboxes for transport types
+# selected_transport_types = []
+# for i, transport in enumerate(transport_types):
+#     if cols[i].checkbox(transport):  # Each transport type gets a column
+#         selected_transport_types.append(transport)
 
 
 # User input for line type 
