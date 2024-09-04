@@ -1,3 +1,4 @@
+
 import time
 import math 
 import pandas as pd
@@ -371,7 +372,7 @@ def plot_sums_and_percentages(df, buffer_distance):
 
 
 
-def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_distance, transport_type=None, line_numbers=None):
+def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_distance, transport_type=None, lijn=None):
     """
     Plots public transport data, CBS population data, and sensed population with a buffer on a map.
     
@@ -402,7 +403,6 @@ def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_di
         else:
             raise ValueError("lijn must be an int or list of int")
 
-    
     # Change projection
     lines = lines.to_crs(ams_gdf.crs)
     cbs_gdf = cbs_gdf.to_crs(ams_gdf.crs)
@@ -582,5 +582,3 @@ def visualization_master_function(lines, cbs, sensed_cbs, ams_gdf, buffer_distan
     fig3 = plot_comparison(average_stats)
 
     return fig1, fig2, fig3
-
-
