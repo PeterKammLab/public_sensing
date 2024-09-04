@@ -35,7 +35,7 @@ st.title("Public Transport Sensing")
 # )
 
 # Organize options into rows with checkboxes
-types = [None, 'Bus', 'Tram', 'Night Bus]
+types = [None, 'Bus', 'Tram', 'Night Bus']
 
 # Create a grid of checkboxes
 selected_lines = []
