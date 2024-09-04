@@ -28,33 +28,12 @@ line_number = None  # Assuming single line number is not needed for user input
 # Streamlit interface
 st.title("Public Transport Sensing")
 
-# # User input for transport type
-# transport_type = st.selectbox(
-#     "Select Transport Type",
-#     (None, 'Bus', 'Tram', 'Night Bus')
-# )
+# User input for transport type
+transport_type = st.selectbox(
+    "Select Transport Type",
+    (None, 'Bus', 'Tram', 'Night Bus')
+)
 
-# Title for the transport type selection
-st.write("Select Your Transport Type")
-
-# User input for transport type using checkboxes in horizontal layout
-cols = st.columns(4)  # Adjust the number of columns if needed
-
-# Define transport types including 'None'
-transport_types = ['None', 'Bus', 'Tram', 'Night Bus']
-
-# Create checkboxes for transport types
-selected_transport_types = []
-for i, transport in enumerate(transport_types):
-    if cols[i % len(cols)].checkbox(transport):  # Each transport type gets a column
-        if transport == 'None':
-            selected_transport_types = ['None']
-            break
-        selected_transport_types.append(transport)
-
-# Display selected transport types
-if selected_transport_types != ['None']:
-    st.write("You selected the following transport types:", selected_transport_types)
 
 # Display selected transport types
 #st.write("You selected the following transport types:", selected_transport_types)
