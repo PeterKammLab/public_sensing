@@ -34,16 +34,17 @@ st.title("Public Transport Sensing")
 #     (None, 'Bus', 'Tram', 'Night Bus')
 # )
 
-# Organize options into rows with checkboxes
-types = [None, 'Bus', 'Tram', 'Night Bus']
+# User input for transport type using checkboxes in horizontal layout
+cols = st.columns(3)  # Adjust the number of columns
 
-# Create a grid of checkboxes
-selected_lines = []
-cols = st.columns(6)  # Adjust number of columns to control layout
+# Define transport types
+transport_types = ['Bus', 'Tram', 'Night Bus']
 
-for i, line in enumerate(types):
-    if cols[i % 6].checkbox(line):
-        selected_lines.append(line)
+# Create checkboxes for transport types
+selected_transport_types = []
+for i, transport in enumerate(transport_types):
+    if cols[i].checkbox(transport):  # Each transport type gets a column
+        selected_transport_types.append(transport)
 
 
 # User input for line type 
