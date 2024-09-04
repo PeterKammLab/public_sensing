@@ -42,9 +42,8 @@ line_number = st.multiselect(
    '66', '267', '369', '62', 'N85', '15', 'N84', '40', '245', '246', '247', '76')
 )
 
-
 # Now line_numbers will be a list containing the user's selected options
-st.write("You selected:", line_numbers)
+#st.write("You selected:", line_numbers)
 
 # User input for buffer distance
 buffer_distance = st.slider(
