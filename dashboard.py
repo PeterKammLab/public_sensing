@@ -95,4 +95,5 @@ if st.button("Run Analysis"):
     # Additional information
     st.markdown("### Who do we sense for?", unsafe_allow_html=True)
     st.write(comparison_df)
+    st.write(merged_df)
 
