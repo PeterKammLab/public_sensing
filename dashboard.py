@@ -28,40 +28,32 @@ line_number = None  # Assuming single line number is not needed for user input
 # Streamlit interface
 st.title("Public Transport Sensing")
 
-# User input for transport type
-transport_type = st.selectbox(
-    "Select Transport Type",
-    (None, 'Bus', 'Tram', 'Night Bus')
-)
-
-# # User input for line type 
-# line_number = st.multiselect(
-#     "Select Your Favourite Line",
-#   (None, '1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', '24', '26', '18', '21', '22', '34', '35', '36', '37', '38', '41', '43', '44', '47', 
-#    '49', '61', '63', '65', '68', '231', '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 'N89', 'N91', 'N93', '461', '463', '464', '48', 
-#    '66', '267', '369', '62', 'N85', '15', 'N84', '40', '245', '246', '247', '76')
+# # User input for transport type
+# transport_type = st.selectbox(
+#     "Select Transport Type",
+#     (None, 'Bus', 'Tram', 'Night Bus')
 # )
 
-
 # Organize options into rows with checkboxes
-lines = ['1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', '24', '26', '18', '21', '22', 
-         '34', '35', '36', '37', '38', '41', '43', '44', '47', '49', '61', '63', '65', '68', '231', 
-         '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 'N89', 'N91', 'N93', '461', '463', 
-         '464', '48', '66', '267', '369', '62', 'N85', '15', 'N84', '40', '245', '246', '247', '76']
+types = [None, 'Bus', 'Tram', 'Night Bus]
 
 # Create a grid of checkboxes
 selected_lines = []
 cols = st.columns(6)  # Adjust number of columns to control layout
 
-for i, line in enumerate(lines):
+for i, line in enumerate(types):
     if cols[i % 6].checkbox(line):
         selected_lines.append(line)
 
-# Display selected lines
-#st.write("You selected the following lines:", selected_lines)
 
-# Now line_numbers will be a list containing the user's selected options
-#st.write("You selected:", line_numbers)
+# User input for line type 
+line_number = st.multiselect(
+    "Select Your Favourite Line",
+  (None, '1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', '24', '26', '18', '21', '22', '34', '35', '36', '37', '38', '41', '43', '44', '47', 
+   '49', '61', '63', '65', '68', '231', '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 'N89', 'N91', 'N93', '461', '463', '464', '48', 
+   '66', '267', '369', '62', 'N85', '15', 'N84', '40', '245', '246', '247', '76')
+)
+
 
 # User input for buffer distance
 buffer_distance = st.slider(
