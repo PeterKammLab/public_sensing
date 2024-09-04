@@ -34,7 +34,6 @@ transport_type = st.selectbox(
     (None, 'Bus', 'Tram', 'Night Bus')
 )
 
-
 # Display selected transport types
 #st.write("You selected the following transport types:", selected_transport_types)
 
