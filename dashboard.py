@@ -35,7 +35,7 @@ transport_type = st.selectbox(
 )
 
 # User input for line type 
-line_number = st.multiselect(
+line_number = st.selectbox(
     "Select Your Favourite Line",
   (None, '1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', '24', '26', '18', '21', '22', '34', '35', '36', '37', '38', '41', '43', '44', '47', 
    '49', '61', '63', '65', '68', '231', '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 'N89', 'N91', 'N93', '461', '463', '464', '48', 
@@ -43,7 +43,7 @@ line_number = st.multiselect(
 )
 
 # Now line_numbers will be a list containing the user's selected options
-st.write("You selected:", line_numbers)
+#st.write("You selected:", line_numbers)
 
 # User input for buffer distance
 buffer_distance = st.slider(
