@@ -34,11 +34,15 @@ st.title("Public Transport Sensing")
 #     (None, 'Bus', 'Tram', 'Night Bus')
 # )
 
+# Title for the transport type selection
+st.write("Select Your Transport Type")
+
+
 # User input for transport type using checkboxes in horizontal layout
 cols = st.columns(3)  # Adjust the number of columns
 
 # Define transport types
-transport_types = ['Bus', 'Tram', 'Night Bus']
+transport_types = [None, 'Bus', 'Tram', 'Night Bus']
 
 # Create checkboxes for transport types
 selected_transport_types = []
