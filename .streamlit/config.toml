@@ -1,0 +1,6 @@
+[server]
+headless = true
+
+[theme]
+# This will specify the path to your icon file
+favicon = "icon.png"
