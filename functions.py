@@ -27,17 +27,18 @@ def read_and_project_transport_data(filepath, line_numbers=None, crs='EPSG:32633
     # Read shapefile
     gdf = gpd.read_file(filepath)
     
-     # Apply filtering based on line_numbers if provided
+    # Apply filtering based on line_numbers if provided
     if line_numbers is not None:
         if isinstance(line_numbers, (list, tuple)):
             gdf = gdf[gdf["Lijn_Numbe"].isin(line_numbers)]
-        elif isinstance(line_numbers, int):
+        elif isinstance(line_numbers, str): #int):
             gdf = gdf[gdf["Lijn_Numbe"] == line_numbers]
         else:
             raise ValueError("line_numbers must be an int, list, or tuple")
     
-    # Apply filtering based on transport_type if provided
-    if transport_type is not None:
+    #Apply filtering based on transport_type if provided
+    if (transport_type is not None) and (line_number is None):
+    #if transport_type is not None:
         if isinstance(transport_type, list):
             gdf = gdf[gdf["type"].isin(transport_type)]
         elif isinstance(transport_type, str):
@@ -49,6 +50,7 @@ def read_and_project_transport_data(filepath, line_numbers=None, crs='EPSG:32633
     gdf_projected = gdf.to_crs(crs)
     
     return gdf_projected
+
 
 
 def calculate_buffer(gdf, buffer_distance, crs='EPSG:3857'):
