@@ -347,7 +347,7 @@ def plot_sums_and_percentages(df, buffer_distance):
     ax1.yaxis.set_tick_params(width=0)
 
     # Set labels and title
-    ax1.set_xlabel('Sociodemographics', fontweight='bold')
+    ax1.set_xlabel('Sociodemographics (Inclusion)', fontweight='bold')
     #ax1.set_ylabel('Population', fontweight='bold')
     #ax1.set_title(f'public transport sensing {buffer_distance}m buffer', fontweight='bold', fontsize=14)
     ax1.set_xticks([i + bar_width / 2 for i in index])
@@ -483,7 +483,7 @@ def plot_comparison(average_stats):
 
     # Customizing the plot
     #plt.title('Comparison of Metrics for Amsterdam and Sensed Area')
-    plt.xlabel('Sociodemographics',fontweight='bold')
+    plt.xlabel('Sociodemographics (Averages)',fontweight='bold')
     plt.ylabel('Percentage %', fontweight='bold')
     plt.xticks(rotation=45)
     plt.legend()
