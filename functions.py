@@ -38,7 +38,7 @@ def read_and_project_transport_data(filepath, line_numbers=None, crs='EPSG:32633
             raise ValueError("line_numbers must be an int, list, or tuple")
     
     #Apply filtering based on transport_type if provided
-    if (transport_type is not None) and (line_number is None):
+    if (transport_type is not None) and (line_numbers is None):
     #if transport_type is not None:
         if isinstance(transport_type, list):
             gdf = gdf[gdf["type"].isin(transport_type)]
