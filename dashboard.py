@@ -79,7 +79,7 @@ if st.button("Run Analysis"):
     
     #st.subheader("Comparison Plot")
     plot_comparison(average_stats)
-    st.image('comparison.png', use_column_width=True, caption='for averages')
+    st.image('comparison.png', use_column_width=True) #caption='for averages')
 
    #st.write("What are the new stats?")
     #st.write(merged_df)
