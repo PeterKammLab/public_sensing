@@ -41,7 +41,7 @@ st.write("Select Your Transport Type")
 cols = st.columns(3)  # Adjust the number of columns
 
 # Define transport types
-transport_types = ['Bus', 'Tram', 'Night Bus']
+transport_types = [None, 'Bus', 'Tram', 'Night Bus']
 
 # Ensure the transport types and columns align
 if len(transport_types) <= len(cols):
@@ -54,7 +54,7 @@ else:
             selected_transport_types.append(transport)
 
 # Display selected transport types
-st.write("You selected the following transport types:", selected_transport_types)
+#st.write("You selected the following transport types:", selected_transport_types)
 
 
 # # User input for transport type using checkboxes in horizontal layout
