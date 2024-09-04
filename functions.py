@@ -371,7 +371,7 @@ def plot_sums_and_percentages(df, buffer_distance):
 
 
 
-def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_distance, transport_type=None, lijn=None):
+def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_distance, transport_type=None, line_numbers=None):
     """
     Plots public transport data, CBS population data, and sensed population with a buffer on a map.
     
@@ -384,23 +384,42 @@ def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_di
     """
 
  
-    # Filter by transport type if provided
-    if transport_type is not None:
+    # # Filter by transport type if provided
+    # if transport_type is not None:
+    #     if isinstance(transport_type, list):
+    #         lines = lines[lines["type"].isin(transport_type)]
+    #     elif isinstance(transport_type, str):
+    #         lines = lines[lines["type"] == transport_type]
+    #     else:
+    #         raise ValueError("transport_type must be a str or list of str")
+    
+    # # Filter by line numbers if provided
+    # if lijn is not None:
+    #     if isinstance(lijn, list):
+    #         lines = lines[lines["Lijn_Numbe"].isin(lijn)]
+    #     elif isinstance(lijn, int):
+    #         lines = lines[lines["Lijn_Numbe"] == lijn]
+    #     else:
+    #         raise ValueError("lijn must be an int or list of int")
+
+     # Apply filtering based on line_numbers if provided
+    if line_numbers is not None:
+        if isinstance(line_numbers, (list, tuple)):
+            lines = lines[lines["Lijn_Numbe"].isin(line_numbers)]
+        elif isinstance(line_numbers, str): #int):
+            lines = lines[lines["Lijn_Numbe"] == line_numbers]
+        else:
+            raise ValueError("line_numbers must be an int, list, or tuple")
+    
+    #Apply filtering based on transport_type if provided
+    if (transport_type is not None) and (line_numbers is None):
+    #if transport_type is not None:
         if isinstance(transport_type, list):
             lines = lines[lines["type"].isin(transport_type)]
         elif isinstance(transport_type, str):
             lines = lines[lines["type"] == transport_type]
         else:
             raise ValueError("transport_type must be a str or list of str")
-    
-    # Filter by line numbers if provided
-    if lijn is not None:
-        if isinstance(lijn, list):
-            lines = lines[lines["Lijn_Numbe"].isin(lijn)]
-        elif isinstance(lijn, int):
-            lines = lines[lines["Lijn_Numbe"] == lijn]
-        else:
-            raise ValueError("lijn must be an int or list of int")
 
     # Change projection
     lines = lines.to_crs(ams_gdf.crs)
