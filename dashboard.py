@@ -55,7 +55,7 @@ buffer_distance = st.slider(
 if st.button("Run Analysis"):
     # Call the analysis function
     buffered_trams_gdf, sensed_cbs, merged_df, comparison_df, average_stats = master_function(
-        transport_filepath, cbs_filepath, buffer_distance, line_number, transport_type=transport_type
+        transport_filepath, cbs_filepath, buffer_distance, line_number, transport_type
     )
     lines = read_and_project_transport_data("public_amsterdam.shp")
     buffered_lines = calculate_buffer(lines, buffer_distance)
