@@ -1,5 +1,5 @@
 import streamlit as st
-from functions import * 
+from functions import *  
 
 import time
 import math 
