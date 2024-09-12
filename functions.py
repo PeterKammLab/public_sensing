@@ -454,7 +454,7 @@ def plot_transport_and_population(lines, cbs_gdf, sensed_gdf, ams_gdf, buffer_di
     
 def plot_comparison(average_stats):
     """
-    Plots a comparison of metrics for different areas using a line plot.
+    Plots a comparison of metrics for different areas using a scatter plot.
     
     Parameters:
         df (pd.DataFrame): DataFrame containing the normalized statistics with columns ['Area', 'Metric', 'Value'].
@@ -474,20 +474,19 @@ def plot_comparison(average_stats):
     plt.figure(figsize=(14, 6))
     ax = plt.gca()  # Get current axis
 
-    # Define colors for the lines
+    # Define colors for the points
     colors = {
         'Amsterdam': '#ffa3c4',  # Pink color
         'Sensed Area': '#85b66f'  # Green color
     }
 
-    # Plot lines for each area
+    # Plot scatter points for each area
     for area in df['Area'].unique():
         df_area = df_melted[df_melted['Area'] == area]
-        plt.plot(df_area['Metric'], df_area['Value'], color=colors.get(area, '#000000'), linewidth=2.25, marker='o', label=area)
+        plt.scatter(df_area['Metric'], df_area['Value'], color=colors.get(area, '#000000'), s=150, label=area, marker='o')
 
     # Customizing the plot
-    #plt.title('Comparison of Metrics for Amsterdam and Sensed Area')
-    plt.xlabel('Sociodemographics (Averages)',fontweight='bold')
+    plt.xlabel('Sociodemographics', fontweight='bold')
     plt.ylabel('Percentage %', fontweight='bold')
     plt.xticks(rotation=45)
     plt.legend()
@@ -505,13 +504,8 @@ def plot_comparison(average_stats):
     ax.grid(False)
 
     # Show plot
-    #plt.show()
+    plt.show()
 
-    plt.gcf()
-
-    # Save plot as PNG
-    plt.savefig('comparison.png', bbox_inches='tight')
-    plt.close()
 
 
 def master_function(transport_filepath, cbs_filepath, buffer_distance, line_number=None, transport_type=None, crs='EPSG:32633'):
