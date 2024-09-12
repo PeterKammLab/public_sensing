@@ -504,9 +504,14 @@ def plot_comparison(average_stats):
     ax.grid(False)
 
     # Show plot
-    plt.show()
+    #plt.show()
 
+    plt.gcf()
+    #plt.show()
 
+    # Save plot as PNG
+    plt.savefig('comparison.png', bbox_inches='tight')
+    plt.close()
 
 def master_function(transport_filepath, cbs_filepath, buffer_distance, line_number=None, transport_type=None, crs='EPSG:32633'):
     """
