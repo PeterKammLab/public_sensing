@@ -708,6 +708,10 @@ def plot_counts(weighted_freq_cbs, ams_gdf):
     # Show plot
     plt.show()
 
+    # Save plot as PNG
+    plt.savefig('counts_cbs.png', bbox_inches='tight')
+    plt.close(fig)
+
 
 def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
     """
@@ -757,6 +761,10 @@ def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
     # Show plot
     plt.show()
 
+    # Plot figure
+    plt.savefig('weights_cbs.png', bbox_inches='tight')
+    plt.close(fig)
+
 
 def plot_ratios_comparison(ratios_df):
     """
@@ -805,6 +813,10 @@ def plot_ratios_comparison(ratios_df):
     plt.tight_layout()
     plt.show()
 
+    
+    # Save plot as PNG
+    plt.savefig('ratios.png', bbox_inches='tight')
+    plt.close()
 
 # ### Master Function Visualistions
 
