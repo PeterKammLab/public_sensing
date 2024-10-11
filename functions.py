@@ -664,6 +664,35 @@ def process_frequencies(file_path):
     return weighted_freq_cbs, ratios_df
 
 
+def normalize_weights_and_merge(weighted_freq_cbs):
+    # Specify the columns to normalize
+    columns_to_normalize = [
+        'Weight_inhab', 
+        'Weight_0_15', 
+        'Weight_15_25', 
+        'Weight_25_45', 
+        'Weight_45_65', 
+        'Weight_65+', 
+        'Weight_woning',  
+        'Weight_nederlan', 
+        'Weight_west_mig', 
+        'Weight_n_west_m'
+    ]
+    
+    # Store the original count and geometry
+    original_count_and_geometry = weighted_freq_cbs[['crs28992','count', 'geometry']]
+
+    # Normalize each specified column by its sum
+    for column in columns_to_normalize:
+        if column in weighted_freq_cbs.columns:  # Check if the column exists in the GeoDataFrame
+            weighted_freq_cbs[column + '_norm'] = weighted_freq_cbs[column] / weighted_freq_cbs[column].sum()  # Create new normalized column
+
+    # Merge the original count and geometry back into the normalized GeoDataFrame
+    normalized_gdf = weighted_freq_cbs.merge(original_count_and_geometry, on='crs28992')
+
+    return normalized_gdf
+
+
 
 def plot_counts(weighted_freq_cbs, ams_gdf):
     """
