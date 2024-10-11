@@ -85,12 +85,12 @@ with tab2:
     weighted_freq_cbs, ratios_df = process_frequencies(file_path)
 
     # Display initial map and ratios DataFrame
-    st.subheader("Ratios Comparison")
+    st.subheader("")
     plot_ratios_comparison(ratios_df)
     st.image('ratios.png', use_column_width=True)
     
     # Display initial map
-    st.subheader("Counts Visualization")
+    st.subheader("")
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
