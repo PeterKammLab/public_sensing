@@ -807,7 +807,7 @@ def plot_ratios_comparison(ratios_df):
     ax.yaxis.set_ticks_position('none')
 
     # Add title
-    ax.set_title('Frequencies per Person/Unit', fontweight='bold', fontsize=12)
+    ax.set_title('Frequencies per Person/Unit', fontweight='bold', fontsize=15)
 
     # Adjust layout and show plot
     plt.tight_layout()
