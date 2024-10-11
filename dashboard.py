@@ -24,7 +24,7 @@ line_number = None  # Assuming single line number is not needed for user input
 st.title("Public Transport Sensing")
 
 # Sidebar navigation
-page = st.sidebar.selectbox("Select Page", ["Analysis", "Frequency Visualization"])
+page = st.sidebar.selectbox("Select Page", ["Analysis", "Frequencies"])
 
 if page == "Analysis":
     # User input for transport type
