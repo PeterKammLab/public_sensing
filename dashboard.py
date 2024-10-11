@@ -83,7 +83,7 @@ elif page == "Frequencies":
     weighted_freq_cbs, ratios_df = process_frequencies(file_path)
 
     # Display initial map and ratios DataFrame
-    st.subheader("Ratios Comparison")
+    #st.subheader("Ratios Comparison")
     plot_ratios_comparison(ratios_df)
     st.image('ratios.png', use_column_width=True)
     
