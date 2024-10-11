@@ -13,6 +13,7 @@ from shapely.geometry import LineString, MultiLineString
 from shapely.geometry import Point, Polygon
 import matplotlib.lines as mlines
 from matplotlib.colors import LinearSegmentedColormap
+import mapclassify
 
 
 # Load initial data
