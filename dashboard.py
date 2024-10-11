@@ -101,6 +101,29 @@ with tab3:
     # User inputs for frequency visualization
     options = ['Weight_inhab'] + [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] 
     column_to_plot = st.selectbox("Select Column to Plot", options=options)
+
+    # Define the mapping of user-friendly names to actual column names
+    label_mapping = {
+    '    Inhabitants': 'Weight_inhab',
+        'Age 0-15': 'Weight_0_15',        # Replace with actual column name
+        'Age 15-45': 'Weight_15_45',      # Replace with actual column name
+        'Age 45-65': 'Weight_45_65',      # Replace with actual column name
+        'Age 65+': 'Weight_65_plus',      # Replace with actual column name
+        'Housing Units': 'Weight_woning',  # Replace with actual column name
+        'Dutch': 'Weight_nederlan',
+        'West. Migration': 'Weight_west_mig',  # Replace with actual column name
+        'Non-West. Migration': 'Weight_n_est_m'  # Replace with actual column name
+    }
+
+    # Create options for the selectbox with user-friendly labels
+    options = list(label_mapping.keys())
+
+    # Select column to plot using the user-friendly names
+    column_to_plot_label = st.selectbox("Select Column to Plot", options=options)
+
+    # Get the actual column name for plotting
+    column_to_plot = label_mapping[column_to_plot_label]
+
     
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
