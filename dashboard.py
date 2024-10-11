@@ -94,7 +94,7 @@ elif page == "Frequencies":
 
      # User inputs for frequency visualization
     # Include 'Weight_inhab' as an additional option, exclude 'count'
-    options = [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] + ['Weight_inhab']
+    options = ['Weight_inhab'] + [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] 
     column_to_plot = st.selectbox("Select Column to Plot", options=options)
     
     # Button to perform frequency analysis and display results
