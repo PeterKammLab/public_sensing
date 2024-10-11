@@ -11,6 +11,8 @@ from shapely import wkt
 from shapely.geometry import LineString, MultiLineString
 from shapely.geometry import Point, Polygon
 import matplotlib.lines as mlines
+from matplotlib.colors import LinearSegmentedColormap
+
 
 # Load initial data
 ams_gdf = gpd.read_file("gemeente_T.shp")
