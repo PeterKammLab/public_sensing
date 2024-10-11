@@ -92,9 +92,11 @@ elif page == "Frequencies":
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
-    # User inputs for frequency visualization
-    column_to_plot = st.selectbox("Select Attribute", options = [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count']) +  ['Weight_inhab']  # Adjust as needed
-
+     # User inputs for frequency visualization
+    # Include 'Weight_inhab' as an additional option, exclude 'count'
+    options = [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] + ['Weight_inhab']
+    column_to_plot = st.selectbox("Select Column to Plot", options=options)
+    
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
         # Visualization function for frequencies
