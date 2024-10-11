@@ -1,6 +1,6 @@
 import streamlit as st
 from functions import *  
-from functions import visualize_frequencies  # Import specific functions if needed
+from functions import visualize_frequencies
 
 import time
 import math 
@@ -15,20 +15,18 @@ import matplotlib.lines as mlines
 from matplotlib.colors import LinearSegmentedColormap
 import mapclassify
 
-
 # Load initial data
 ams_gdf = gpd.read_file("gemeente_T.shp")
 transport_filepath = 'public_amsterdam.shp'
 cbs_filepath = 'cbs_amsterdam_2021_clean.shp'
-line_number = None  # Assuming single line number is not needed for user input
 
 # Streamlit interface
 st.title("Public Transport Sensing")
 
-# Sidebar navigation
-page = st.sidebar.selectbox("Select Page", ["Analysis", "Frequencies"])
+# Use tabs instead of sidebar
+tab1, tab2 = st.tabs(["Analysis", "Frequencies"])
 
-if page == "Analysis":
+with tab1:
     # User input for transport type
     transport_type = st.selectbox(
         "Select Transport Type",
@@ -38,9 +36,13 @@ if page == "Analysis":
     # User input for line type 
     line_number = st.selectbox(
         "Select Your Favourite Line",
-        (None, '1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', '24', '26', '18', '21', '22', '34', '35', '36', '37', '38', '41', '43', '44', '47', 
-        '49', '61', '63', '65', '68', '231', '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 'N89', 'N91', 'N93', '461', '463', '464', '48', 
-        '66', '267', '369', '62', 'N85', '15', 'N84', '40', '245', '246', '247', '76')
+        (None, '1', '2', '3', '4', '5', '7', '12', '13', '14', '17', '19', 
+         '24', '26', '18', '21', '22', '34', '35', '36', '37', '38', 
+         '41', '43', '44', '47', '49', '61', '63', '65', '68', '231', 
+         '232', '233', 'N81', 'N82', 'N83', 'N86', 'N87', 'N88', 
+         'N89', 'N91', 'N93', '461', '463', '464', '48', '66', 
+         '267', '369', '62', 'N85', '15', 'N84', '40', '245', 
+         '246', '247', '76')
     )
 
     # User input for buffer distance
@@ -75,7 +77,7 @@ if page == "Analysis":
         st.write(comparison_df)
         st.write(merged_df)
 
-elif page == "Frequencies":
+with tab2:
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
 
@@ -83,26 +85,21 @@ elif page == "Frequencies":
     weighted_freq_cbs, ratios_df = process_frequencies(file_path)
 
     # Display initial map and ratios DataFrame
-    st.subheader("")
+    st.subheader("Ratios Comparison")
     plot_ratios_comparison(ratios_df)
     st.image('ratios.png', use_column_width=True)
     
     # Display initial map
-    st.subheader("")
+    st.subheader("Counts Visualization")
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
-     # User inputs for frequency visualization
-    # Include 'Weight_inhab' as an additional option, exclude 'count'
+    # User inputs for frequency visualization
     options = ['Weight_inhab'] + [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] 
     column_to_plot = st.selectbox("Select Column to Plot", options=options)
     
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
-        # Visualization function for frequencies
         st.subheader("Frequency Visualization")
-        #visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
-
         plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
         st.image('weights_cbs.png', use_column_width=True)
-
