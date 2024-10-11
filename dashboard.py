@@ -24,7 +24,7 @@ cbs_filepath = 'cbs_amsterdam_2021_clean.shp'
 st.title("Public Transport Sensing")
 
 # Use tabs instead of sidebar
-tab1, tab2 = st.tabs(["Analysis", "Frequencies"])
+tab1, tab2 = st.tabs(["**Analysis**", "**Frequencies**"])
 
 with tab1:
     # User input for transport type
