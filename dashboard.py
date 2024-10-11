@@ -79,18 +79,20 @@ elif page == "Frequencies":
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
 
+    # Process frequencies using the fixed file path
+    weighted_freq_cbs, ratios_df = process_frequencies(file_path)
+
+    # Display initial map and ratios DataFrame
+    st.subheader("Ratios Comparison")
+    plot_ratios_comparison(ratios_df)
+    st.image('ratios.png', use_column_width=True)
+
     # User inputs for frequency visualization
-    column_to_plot = st.selectbox("Select Column to Plot", options=None)  # Initially set to None
+    column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
 
-    # Button to perform frequency analysis
+    # Button to perform frequency analysis and display results
     if st.button("Run Frequency Analysis"):
-        # Process frequencies using the fixed file path
-        weighted_freq_cbs, ratios_df = process_frequencies(file_path)
-
-        # Update the column options after processing the data
-        column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
-
-        # Visualization function
+        # Visualization function for frequencies
         st.subheader("Frequency Visualization")
         visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
 
@@ -100,7 +102,4 @@ elif page == "Frequencies":
 
         plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
         st.image('weights_cbs.png', use_column_width=True)
-
-        plot_ratios_comparison(ratios_df)
-        st.image('ratios.png', use_column_width=True)
 
