@@ -72,12 +72,22 @@ if page == "Analysis":
         st.write(merged_df)
 
 elif page == "Frequency Visualization":
-    # User inputs for frequency visualization
-    column_to_plot = st.selectbox("Select Column to Plot", options=your_column_options_here)
-    weighted_freq_cbs = calculate_weighted_frequencies(sensed_cbs)  # You need to define this function
-    ratios_df = calculate_ratios(weighted_freq_cbs)  # Define this function if needed
+    # File uploader for shapefile
+    uploaded_file = st.file_uploader("Upload a shapefile", type=["shp"])
 
-    # Visualization function
+    if uploaded_file is not None:
+        # Load the uploaded shapefile
+        file_path = uploaded_file.name
+        weighted_freq_cbs, ratios_df = process_frequencies(file_path)  # Ensure you have this function defined
+
+        # Load the Amsterdam boundary GeoDataFrame
+        ams_gdf = gpd.read_file("gemeente_T.shp")
+
+        # User input for column to plot
+        column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns)
+
+        # Button to visualize frequencies
+        if st.button("Visualize Frequencies"):
+            visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
+
     st.subheader("Frequency Visualization")
-    visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
-
