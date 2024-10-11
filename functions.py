@@ -581,3 +581,247 @@ def visualization_master_function(lines, cbs, sensed_cbs, ams_gdf, buffer_distan
     fig3 = plot_comparison(average_stats)
 
     return fig1, fig2, fig3
+
+
+
+
+
+
+def process_frequencies(file_path):
+    """
+    Processes the spatial sensing data, calculates weighted sums, and returns the modified GeoDataFrame 
+    with weighted columns (including geometry) and a separate DataFrame with ratios of weighted sums 
+    to normal sums.
+    
+    Parameters:
+    file_path (str): The path to the shapefile containing sensing data.
+    
+    Returns:
+    tuple: A tuple containing:
+        - gpd.GeoDataFrame: The modified GeoDataFrame with weighted columns, including geometry.
+        - pd.DataFrame: A DataFrame containing the ratios of weighted sums to normal sums, rounded to 1 decimal point.
+    """
+    # Load the shapefile
+    freq_cbs = gpd.read_file(file_path)
+    
+    # Define the columns to analyze (including 'geometry')
+    columns_to_weight = ['A_inhab', 'A_0_15', 'A_15_25', 'A_25_45', 'A_45_65', 'A_65+', 'A_woning', 
+                         'A_nederlan', 'A_west_mig', 'A_n_west_m']
+
+    # Create a new GeoDataFrame for weighted values, preserving crs28992, points_cou, and geometry
+    weighted_freq_cbs = freq_cbs[['crs28992', 'count', 'geometry']].copy()
+
+    # Calculate weighted values for the specified columns
+    for col in columns_to_weight:
+        weighted_freq_cbs[col] = freq_cbs[col] * freq_cbs['count']
+
+    # Drop the 'G_woz_woni' column if it exists
+    weighted_freq_cbs = weighted_freq_cbs.drop(columns=['G_woz_woni'], errors='ignore')
+
+    # Define the columns to sum
+    columns_to_sum = columns_to_weight
+    
+    # Initialize dictionaries for weighted sums, normal sums, and ratios
+    weighted_sums = {}
+    normal_sums = {}
+    ratios = {}
+
+    # Loop over the columns to calculate the weighted sum and total sum
+    for col in columns_to_sum:
+        weighted_sums[col] = (freq_cbs[col] * freq_cbs['count']).sum()
+        normal_sums[col] = freq_cbs[col].sum()
+        ratios[col] = weighted_sums[col] / normal_sums[col]
+
+    # Convert the ratios dictionary into a DataFrame
+    ratios_df = pd.DataFrame([ratios])
+
+    # Round the ratios to one decimal point
+    ratios_df = ratios_df.round(1)
+    
+    # Ensure weighted_freq_cbs remains a GeoDataFrame
+    weighted_freq_cbs = gpd.GeoDataFrame(weighted_freq_cbs, geometry='geometry')
+
+    # Replace NaN with 0 for new weighted columns and round to 0 decimal places
+    weighted_freq_cbs[columns_to_weight] = weighted_freq_cbs[columns_to_weight].fillna(0).round(0).astype(int)
+
+    # Change names
+    weighted_freq_cbs.rename(columns=lambda x: x.replace('A_', 'Weight_') if x.startswith('A_') else x, inplace=True)
+
+    # Sorting
+    weighted_freq_cbs = weighted_freq_cbs.sort_values(by='Weight_inhab', ascending=False)
+
+    # Fill NA values
+    weighted_freq_cbs = weighted_freq_cbs.fillna(0)
+
+
+    # Reorder the columns
+    columns_ordered = [col for col in weighted_freq_cbs.columns if col not in ['geometry', 'count']] + ['count', 'geometry']
+    weighted_freq_cbs = weighted_freq_cbs[columns_ordered]
+
+    # Return the weighted_freq_cbs GeoDataFrame and ratios_df DataFrame separately
+    return weighted_freq_cbs, ratios_df
+
+
+
+def plot_counts(weighted_freq_cbs, ams_gdf):
+    """
+    Plots the counts from the weighted_freq_cbs GeoDataFrame with the boundary of the area (ams_gdf) on a map.
+    
+    Parameters:
+        weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
+        ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
+    """
+    # Filter out rows where count is zero
+    weighted_freq_cbs = weighted_freq_cbs[weighted_freq_cbs['count'] > 0]
+    
+    # Change projection
+    weighted_freq_cbs = weighted_freq_cbs.to_crs(ams_gdf.crs)
+    
+    # Set up the plot with a dark background
+    plt.style.use('default')
+
+    # Define custom colormap from #e15989 to #85b66f
+    custom_cmap = LinearSegmentedColormap.from_list("custom_cmap", ['#e15989', '#85b66f'])
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(15, 10))
+    
+    # Plot the boundary
+    ams_gdf.boundary.plot(ax=ax, linewidth=0.5, edgecolor='black')
+
+    # Create a classifier for equal counts (quantiles)
+    classifier = mapclassify.Quantiles(weighted_freq_cbs['count'], k=8)
+
+    # Plot the counts from weighted_freq_cbs
+    weighted_freq_cbs.plot(column='count', ax=ax, markersize=5, cmap=custom_cmap, 
+                           legend=True, scheme='quantiles', classification_kwds={'k': 8},
+                           edgecolor='white', linewidth=0.35)
+    
+    # Add title and labels
+    ax.set_title('Frequency Map - Amount of Measurements', fontweight='bold', fontsize=12)
+    
+    # Remove X and Y axes
+    ax.set_axis_off()
+    
+    # Show plot
+    plt.show()
+
+
+def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
+    """
+    Plots the selected column from the weighted_freq_cbs GeoDataFrame with the boundary of the area (ams_gdf) on a map.
+    
+    Parameters:
+        weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
+        ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
+        column_to_plot (str): The column name from weighted_freq_cbs to visualize.
+    """
+    # Ensure the column exists in the GeoDataFrame
+    if column_to_plot not in weighted_freq_cbs.columns:
+        raise ValueError(f"Column '{column_to_plot}' not found in the provided GeoDataFrame.")
+    
+    # Filter out rows where the selected column is zero
+    weighted_freq_cbs = weighted_freq_cbs[weighted_freq_cbs[column_to_plot] > 0]
+
+    # Change projection to match the boundary
+    weighted_freq_cbs = weighted_freq_cbs.to_crs(ams_gdf.crs)
+    
+    # Set up the plot with a dark background
+    plt.style.use('default')
+
+    # Define custom colormap from #e15989 to #85b66f
+    custom_cmap = LinearSegmentedColormap.from_list("custom_cmap", ['#e15989', '#85b66f'])
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(15, 10))
+    
+    # Plot the boundary
+    ams_gdf.boundary.plot(ax=ax, linewidth=0.5, edgecolor='black')
+
+    # Create a classifier for equal counts (quantiles)
+    classifier = mapclassify.Quantiles(weighted_freq_cbs[column_to_plot], k=8)
+
+    # Plot the selected column using the custom colormap and 8 quantile classes (equal count)
+    weighted_freq_cbs.plot(column=column_to_plot, ax=ax, markersize=5, cmap=custom_cmap, 
+                           legend=True, scheme='quantiles', classification_kwds={'k': 8},
+                           edgecolor='white', linewidth=0.35)
+
+    # Add title and labels
+    ax.set_title(f'Frequencies x Units ({column_to_plot})', fontweight='bold', fontsize=12)
+    
+    # Remove X and Y axes
+    ax.set_axis_off()
+    
+    # Show plot
+    plt.show()
+
+
+def plot_ratios_comparison(ratios_df):
+    """
+    Plots a comparison of demographic ratios using a scatter plot.
+    
+    Parameters:
+        ratios_df (pd.DataFrame): DataFrame containing the demographic ratio columns.
+
+    Returns:
+        None
+    """
+    # Prepare the DataFrame for plotting
+    ratios_df_melted = ratios_df.melt(var_name='Metric', value_name='Value')
+
+    # Create the plot
+    plt.figure(figsize=(14, 6))
+    ax = plt.gca()  # Get current axis
+
+    # Define colors for the points
+    colors = ['#85b66f' if metric != 'A_inhab' else '#ffa3c4' for metric in ratios_df.columns]
+
+    # Scatter plot for demographic ratios
+    ax.scatter(ratios_df.columns, ratios_df.iloc[0], color=colors, s=150)
+
+    # Draw a horizontal pink line at the height of A_inhab
+    ax.axhline(y=ratios_df['A_inhab'].iloc[0], color='#ffa3c4', linestyle='--', linewidth=2, label='A_inhab Line')
+
+    # Customizing the plot
+    plt.xlabel('Sociodemographics', fontweight='bold')
+    plt.ylabel('Measurements', fontweight='bold')
+    plt.xticks(rotation=45)
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Remove axis lines but keep tick labels
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.xaxis.set_ticks_position('none') 
+    ax.yaxis.set_ticks_position('none')
+
+    # Add title
+    ax.set_title('Frequencies per Person/Unit', fontweight='bold', fontsize=12)
+
+    # Adjust layout and show plot
+    plt.tight_layout()
+    plt.show()
+
+
+# ### Master Function Visualistions
+
+# In[20]:
+
+
+def visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df):
+    """
+    Master function to visualize frequencies by calling respective plotting functions.
+
+    Parameters:
+        weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
+        ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
+        column_to_plot (str): The column name from weighted_freq_cbs to visualize.
+        ratios_df (pd.DataFrame): DataFrame containing the demographic ratio columns. Defaults to None.
+    """
+
+    # Plot all three visualizations
+    plot_counts(weighted_freq_cbs, ams_gdf)
+    plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
+    plot_ratios_comparison(ratios_df)
+
