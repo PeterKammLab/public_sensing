@@ -82,6 +82,10 @@ elif page == "Frequencies":
     # Process frequencies using the fixed file path
     weighted_freq_cbs, ratios_df = process_frequencies(file_path)
 
+    # Display initial map
+    plot_counts(weighted_freq_cbs, ams_gdf)
+    st.image('counts_cbs.png', use_column_width=True)
+
     # Display initial map and ratios DataFrame
     st.subheader("Ratios Comparison")
     plot_ratios_comparison(ratios_df)
