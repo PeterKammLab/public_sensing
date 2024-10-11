@@ -78,17 +78,17 @@ if page == "Analysis":
 elif page == "Frequencies":
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
+
+    # User inputs for frequency visualization
+    column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
     
     # Button to perform frequency analysis
     if st.button("Run Frequency Analysis"):
         # Process frequencies using the fixed file path
         weighted_freq_cbs, ratios_df = process_frequencies(file_path)
 
-        # User inputs for frequency visualization
-        column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
-
         # Visualization function
-        st.subheader("Frequency Visualization")
+        #st.subheader("Frequency Visualization")
         visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
 
         # Display results
