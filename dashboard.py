@@ -88,3 +88,13 @@ elif page == "Frequencies":
     # Visualization function
     st.subheader("Frequency Visualization")
     visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
+
+    # Display results
+    plot_counts(weighted_freq_cbs, ams_gdf)
+    st.image('transport_population_plot.png', use_column_width=True)
+        
+    plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
+    st.image('sums_percentages_plot.png', use_column_width=True)
+
+    plot_ratios_comparison(ratios_df)
+    st.image('comparison.png', use_column_width=True)
