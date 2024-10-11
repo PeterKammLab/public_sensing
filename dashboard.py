@@ -88,14 +88,15 @@ elif page == "Frequencies":
     st.image('ratios.png', use_column_width=True)
     
     # Display initial map
+    st.subheader("")
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
     # User inputs for frequency visualization
-    column_to_plot = st.selectbox("Select Column to Plot", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
+    column_to_plot = st.selectbox("Select Attribute", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
 
     # Button to perform frequency analysis and display results
-    if st.button("Run Frequency Analysis"):
+    if st.button("Run Weighted Analysis"):
         # Visualization function for frequencies
         st.subheader("Frequency Visualization")
         visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
