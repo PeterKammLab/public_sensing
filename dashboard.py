@@ -98,10 +98,7 @@ with tab2:
 
 with tab3:
 
-    # User inputs for frequency visualization
-    options = ['Weight_inhab'] + [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] 
-    column_to_plot = st.selectbox("Select Column to Plot", options=options)
-
+ 
     # Define the mapping of user-friendly names to actual column names
     label_mapping = {
     '    Inhabitants': 'Weight_inhab',
@@ -119,7 +116,7 @@ with tab3:
     options = list(label_mapping.keys())
 
     # Select column to plot using the user-friendly names
-    column_to_plot_label = st.selectbox("Select Column to Plot", options=options)
+    column_to_plot_label = st.selectbox("Select Attribute", options=options)
 
     # Get the actual column name for plotting
     column_to_plot = label_mapping[column_to_plot_label]
