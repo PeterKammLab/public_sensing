@@ -1,5 +1,6 @@
 import streamlit as st
 from functions import *  
+from functions import visualize_frequencies  # Import specific functions if needed
 
 import time
 import math 
