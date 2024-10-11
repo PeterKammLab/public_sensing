@@ -99,11 +99,7 @@ elif page == "Frequencies":
     if st.button("Run Weighted Analysis"):
         # Visualization function for frequencies
         st.subheader("Frequency Visualization")
-        visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
-
-        # Display results
-        plot_counts(weighted_freq_cbs, ams_gdf)
-        st.image('counts_cbs.png', use_column_width=True)
+        #visualize_frequencies(weighted_freq_cbs, ams_gdf, column_to_plot, ratios_df)
 
         plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
         st.image('weights_cbs.png', use_column_width=True)
