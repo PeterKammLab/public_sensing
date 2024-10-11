@@ -95,21 +95,21 @@ with tab2:
     st.image('counts_cbs.png', use_column_width=True)
 
     
+   # Normalize the weights after loading the frequencies
+    normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs)
 
 with tab3:
-
- 
     # Define the mapping of user-friendly names to actual column names
     label_mapping = {
-    '    Inhabitants': 'Weight_inhab',
-        'Age 0-15': 'Weight_0_15',        # Replace with actual column name
-        'Age 15-45': 'Weight_15_45',      # Replace with actual column name
-        'Age 45-65': 'Weight_45_65',      # Replace with actual column name
-        'Age 65+': 'Weight_65_plus',      # Replace with actual column name
-        'Housing Units': 'Weight_woning',  # Replace with actual column name
+        'Inhabitants': 'Weight_inhab',
+        'Age 0-15': 'Weight_0_15',
+        'Age 15-45': 'Weight_15_25',
+        'Age 45-65': 'Weight_45_65',
+        'Age 65+': 'Weight_65+',
+        'Housing Units': 'Weight_woning',
         'Dutch': 'Weight_nederlan',
-        'West. Migration': 'Weight_west_mig',  # Replace with actual column name
-        'Non-West. Migration': 'Weight_n_est_m'  # Replace with actual column name
+        'West. Migration': 'Weight_west_mig',
+        'Non-West. Migration': 'Weight_n_west_m'
     }
 
     # Create options for the selectbox with user-friendly labels
@@ -121,9 +121,8 @@ with tab3:
     # Get the actual column name for plotting
     column_to_plot = label_mapping[column_to_plot_label]
 
-    
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
         st.subheader("Frequency Visualization")
-        plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
+        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot)  # Use the normalized GeoDataFrame
         st.image('weights_cbs.png', use_column_width=True)
