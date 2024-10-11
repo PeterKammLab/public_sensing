@@ -93,7 +93,7 @@ elif page == "Frequencies":
     st.image('counts_cbs.png', use_column_width=True)
 
     # User inputs for frequency visualization
-    column_to_plot = st.selectbox("Select Attribute", options=weighted_freq_cbs.columns[3:-1])  # Adjust as needed
+    column_to_plot = st.selectbox("Select Attribute", options = [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'])  # Adjust as needed
 
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
