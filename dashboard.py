@@ -24,7 +24,7 @@ cbs_filepath = 'cbs_amsterdam_2021_clean.shp'
 st.title("Public Transport Sensing")
 
 # Use tabs instead of sidebar
-tab1, tab2 = st.tabs(["**Analysis**", "**Frequencies**"])
+tab1, tab2, tab3 = st.tabs(["**Analysis**", "**Frequencies**", "**Weights**"])
 
 with tab1:
     # User input for transport type
@@ -93,6 +93,10 @@ with tab2:
     st.subheader("")
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
+
+    
+
+with tab3:
 
     # User inputs for frequency visualization
     options = ['Weight_inhab'] + [col for col in weighted_freq_cbs.columns[3:-1] if col != 'count'] 
