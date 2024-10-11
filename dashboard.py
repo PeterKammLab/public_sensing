@@ -73,7 +73,7 @@ if page == "Analysis":
         st.write(comparison_df)
         st.write(merged_df)
 
-elif page == "Frequency Visualization":
+elif page == "Frequency":
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
     
