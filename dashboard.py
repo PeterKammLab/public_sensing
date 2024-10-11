@@ -91,10 +91,10 @@ elif page == "Frequencies":
 
     # Display results
     plot_counts(weighted_freq_cbs, ams_gdf)
-    st.image('transport_population_plot.png', use_column_width=True)
+    st.image('counts_cbs.png', use_column_width=True)
         
     plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot)
-    st.image('sums_percentages_plot.png', use_column_width=True)
+    st.image('weights_cbs.png', use_column_width=True)
 
     plot_ratios_comparison(ratios_df)
-    st.image('comparison.png', use_column_width=True)
+    st.image('ratios.png', use_column_width=True)
