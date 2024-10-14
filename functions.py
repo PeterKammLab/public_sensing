@@ -780,6 +780,10 @@ def plot_counts(weighted_freq_cbs, ams_gdf):
         weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
         ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
     """
+    
+    # Load the shapefile
+    ams_gdf = gpd.read_file('gemeente_T.shp')
+    
     # Filter out rows where count is zero
     weighted_freq_cbs = weighted_freq_cbs[weighted_freq_cbs['count'] > 0]
     
@@ -828,7 +832,12 @@ def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
         weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
         ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
         column_to_plot (str): The column name from weighted_freq_cbs to visualize.
+
     """
+
+    # Load the shapefile
+    ams_gdf = gpd.read_file('gemeente_T.shp')
+    
     # Ensure the column exists in the GeoDataFrame
     if column_to_plot not in weighted_freq_cbs.columns:
         raise ValueError(f"Column '{column_to_plot}' not found in the provided GeoDataFrame.")
@@ -871,6 +880,8 @@ def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
     # Plot figure
     plt.savefig('weights_cbs.png', bbox_inches='tight')
     plt.close(fig)
+
+
 
 
 def plot_ratios_comparison(ratios_df):
