@@ -82,7 +82,7 @@ with tab2:
     file_path = "freq_cbs_1304_fullday.shp"
 
     # Process frequencies using the fixed file path
-    weighted_freq_cbs, ratios_df = process_frequencies(file_path)
+    weighted_freq_cbs, ratios_df, freq_cbs = process_frequencies(file_path)
 
     # Display initial map and ratios DataFrame
     st.subheader("")
@@ -96,20 +96,21 @@ with tab2:
 
     
    # Normalize the weights after loading the frequencies
-    normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs)
+    normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
 
 with tab3:
     # Define the mapping of user-friendly names to actual column names
     label_mapping = {
-        'Inhabitants': 'Weight_inhab',
-        'Age 0-15': 'Weight_0_15',
-        'Age 15-45': 'Weight_15_25',
-        'Age 45-65': 'Weight_45_65',
-        'Age 65+': 'Weight_65+',
-        'Housing Units': 'Weight_woning',
-        'Dutch': 'Weight_nederlan',
-        'West. Migration': 'Weight_west_mig',
-        'Non-West. Migration': 'Weight_n_west_m'
+        'Inhabitants': 'inhab_index',
+        'Age 0-15': '0_15_index',
+        'Age 15-25': '15_25_index',
+        'Age 25-45': '25_45_index',
+        'Age 45-65': '45_65_index',
+        'Age 65+': '65+_index',
+        'Housing Units': 'woning_index',
+        'Dutch': 'nederlan_index',
+        'West. Migration': 'west_mig_index',
+        'Non-West. Migration': 'n_west_m_index'
     }
 
     # Create options for the selectbox with user-friendly labels
