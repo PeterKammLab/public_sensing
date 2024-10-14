@@ -90,7 +90,7 @@ with tab2:
     st.image('counts_cbs.png', use_column_width=True)
 
     # Add a description under the map
-       st.markdown("<p style='color: grey; font-size: 12px;'>This map displays the amount of measurements across the area, "
+    st.markdown("<p style='color: grey; font-size: 12px;'>This map displays the amount of measurements across the area, "
     showing the distribution of frequencies in different regions.</p>", unsafe_allow_html=True)
     
     # Display initial map and ratios DataFrame
