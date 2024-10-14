@@ -661,10 +661,14 @@ def process_frequencies(file_path):
     weighted_freq_cbs = weighted_freq_cbs[columns_ordered]
 
     # Return the weighted_freq_cbs GeoDataFrame and ratios_df DataFrame separately
-    return weighted_freq_cbs, ratios_df
+    return weighted_freq_cbs, ratios_df, freq_cbs
 
 
-def normalize_weights_and_merge(weighted_freq_cbs):
+
+
+
+
+def normalize_weights_and_merge(weighted_freq_cbs, freq_cbs):
     # Specify the columns to normalize
     columns_to_normalize = [
         'Weight_inhab', 
@@ -679,18 +683,92 @@ def normalize_weights_and_merge(weighted_freq_cbs):
         'Weight_n_west_m'
     ]
     
-    # Store the original count and geometry
-    original_count_and_geometry = weighted_freq_cbs[['crs28992','count', 'geometry']]
+    # Specify old columns for frequency sums
+    old_columns = [
+        'A_inhab', 
+        'A_0_15', 
+        'A_15_25', 
+        'A_25_45', 
+        'A_45_65', 
+        'A_65+', 
+        'A_woning',  
+        'A_nederlan', 
+        'A_west_mig', 
+        'A_n_west_m'
+    ]
 
-    # Normalize each specified column by its sum
-    for column in columns_to_normalize:
+    # Store the original count and geometry
+    original_count_and_geometry = weighted_freq_cbs[['crs28992', 'count', 'geometry']]
+
+    # Normalize each specified column by its corresponding sum in freq_cbs
+    for index, column in enumerate(columns_to_normalize):
         if column in weighted_freq_cbs.columns:  # Check if the column exists in the GeoDataFrame
-            weighted_freq_cbs[column + '_norm'] = weighted_freq_cbs[column] / weighted_freq_cbs[column].sum()  # Create new normalized column
+            # Create new normalized column name without 'Weight_' and with an index suffix
+            new_column_name = column.replace('Weight_', '') + '_index'
+            # Use the corresponding old column to get the sum for normalization
+            old_column_name = old_columns[index]  # Match the index with the old_columns
+            weighted_freq_cbs[new_column_name] = weighted_freq_cbs[column] / freq_cbs[old_column_name].sum()  # Normalize using freq_cbs
 
     # Merge the original count and geometry back into the normalized GeoDataFrame
     normalized_gdf = weighted_freq_cbs.merge(original_count_and_geometry, on='crs28992')
 
+    # Drop columns with the '_y' suffix that overlap, keeping only the original count and geometry
+    if 'count_y' in normalized_gdf.columns:
+        normalized_gdf['count'] = normalized_gdf['count_y']  # Keep the 'count' from the original
+    if 'geometry_y' in normalized_gdf.columns:
+        normalized_gdf['geometry'] = normalized_gdf['geometry_y']  # Keep the 'geometry' from the original
+
+    # Drop the duplicate columns
+    normalized_gdf.drop(columns=['count_y', 'geometry_y', 'geometry_x', 'count_x'], inplace=True, errors='ignore')
+
+    # Drop all columns starting with "Weight"
+    weight_columns = [col for col in normalized_gdf.columns if col.startswith('Weight')]
+    normalized_gdf.drop(columns=weight_columns, inplace=True, errors='ignore')
+
+    # Drop all columns containing 'norm'
+    norm_columns = [col for col in normalized_gdf.columns if 'norm' in col]
+    normalized_gdf.drop(columns=norm_columns, inplace=True, errors='ignore')
+
+    # Ensure the result is a GeoDataFrame
+    normalized_gdf = gpd.GeoDataFrame(normalized_gdf, geometry='geometry')
+
     return normalized_gdf
+
+def min_max_normalize_gdf(normalized_gdf):
+    # Fixed columns to normalize
+    columns_to_normalize = [
+        'inhab_index', 
+        '0_15_index', 
+        '15_25_index', 
+        '25_45_index', 
+        '45_65_index', 
+        '65+_index', 
+        'woning_index', 
+        'nederlan_index', 
+        'west_mig_index', 
+        'n_west_m_index'
+    ]
+    
+    # Normalize the specified columns to range [0, 10] based only on non-zero values
+    for column in columns_to_normalize:
+        if column in normalized_gdf.columns:
+            # Filter out zero values for normalization
+            non_zero_values = normalized_gdf[column][normalized_gdf[column] != 0]
+            if not non_zero_values.empty:  # Check if there are non-zero values
+                min_val = non_zero_values.min()
+                max_val = non_zero_values.max()
+                
+                # Normalize the column, applying normalization only to non-zero values
+                normalized_gdf[column] = normalized_gdf[column].where(
+                    normalized_gdf[column] == 0,
+                    10 * (normalized_gdf[column] - min_val) / (max_val - min_val)
+                )
+
+    # Ensure the result is a GeoDataFrame with required columns
+    result_gdf = normalized_gdf[['crs28992'] + columns_to_normalize + ['count', 'geometry']]
+    indexed_10_gdf = gpd.GeoDataFrame(result_gdf, geometry='geometry')
+
+    return indexed_10_gdf
 
 
 
