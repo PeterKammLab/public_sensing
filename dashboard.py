@@ -89,6 +89,11 @@ with tab2:
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
+    # Add a description under the map
+    st.markdown("### Frequency Map")
+    st.markdown("This map displays the amount of measurements across the area, "
+                "showing the distribution of frequencies in different regions.")
+
     # Display initial map and ratios DataFrame
     st.subheader("")
     plot_ratios_comparison(ratios_df)
