@@ -91,12 +91,8 @@ with tab2:
 
     # Add a description under the map
     st.markdown(
-        """
-        <div style='text-align: left; color: grey; font-size: 12px;'>
-            <p>Frequency Map: This map displays the amount of measurements across the area,</p>
-            <p>showing the distribution of frequencies in different regions.</p>
-        </div>
-        """,
+        "<p style='color: grey; font-size: 14px;'>This plot compares demographic ratios across various sociodemographic metrics, "
+        "providing insights into the distribution and relationships within the data.</p>",
         unsafe_allow_html=True
     )
 
