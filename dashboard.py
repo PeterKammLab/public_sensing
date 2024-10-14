@@ -84,16 +84,15 @@ with tab2:
     # Process frequencies using the fixed file path
     weighted_freq_cbs, ratios_df, freq_cbs = process_frequencies(file_path)
 
-    # Display initial map and ratios DataFrame
-    st.subheader("")
-    plot_ratios_comparison(ratios_df)
-    st.image('ratios.png', use_column_width=True)
-    
-    # Display initial map
+     # Display initial map
     st.subheader("")
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
+    # Display initial map and ratios DataFrame
+    st.subheader("")
+    plot_ratios_comparison(ratios_df)
+    st.image('ratios.png', use_column_width=True)
     
    # Normalize the weights after loading the frequencies
     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
