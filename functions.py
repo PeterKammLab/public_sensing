@@ -824,7 +824,65 @@ def plot_counts(weighted_freq_cbs, ams_gdf):
     plt.close(fig)
 
 
+
 def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
+    """
+    Plots the selected column from the weighted_freq_cbs GeoDataFrame with the boundary of the area (ams_gdf) on a map.
+    
+    Parameters:
+        weighted_freq_cbs (gpd.GeoDataFrame): GeoDataFrame containing the weighted data including counts.
+        ams_gdf (gpd.GeoDataFrame): GeoDataFrame containing the boundary of the area to plot.
+        column_to_plot (str): The column name from weighted_freq_cbs to visualize.
+
+    """
+
+    # Load the shapefile
+    ams_gdf = gpd.read_file('gemeente_T.shp')
+    
+    # Ensure the column exists in the GeoDataFrame
+    if column_to_plot not in weighted_freq_cbs.columns:
+        raise ValueError(f"Column '{column_to_plot}' not found in the provided GeoDataFrame.")
+    
+    # Filter out rows where the selected column is zero
+    weighted_freq_cbs = weighted_freq_cbs[weighted_freq_cbs[column_to_plot] > 0]
+
+    # Change projection to match the boundary
+    weighted_freq_cbs = weighted_freq_cbs.to_crs(ams_gdf.crs)
+    
+    # Set up the plot with a dark background
+    plt.style.use('default')
+
+    # Define custom colormap from #e15989 to #85b66f
+    custom_cmap = LinearSegmentedColormap.from_list("custom_cmap", ['#e15989', '#85b66f'])
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(15, 10))
+    
+    # Plot the boundary
+    ams_gdf.boundary.plot(ax=ax, linewidth=0.5, edgecolor='black')
+
+    # Create a classifier for equal counts (quantiles)
+    classifier = mapclassify.Quantiles(weighted_freq_cbs[column_to_plot], k=8)
+
+    # Plot the selected column using the custom colormap and 8 quantile classes (equal count)
+    weighted_freq_cbs.plot(column=column_to_plot, ax=ax, markersize=5, cmap=custom_cmap, 
+                           legend=True, scheme='quantiles', classification_kwds={'k': 8},
+                           edgecolor='white', linewidth=0.35)
+
+    # Add title and labels
+    ax.set_title(f'Measurements x Units ({column_to_plot})', fontweight='bold', fontsize=12)
+    
+    # Remove X and Y axes
+    ax.set_axis_off()
+    
+    # Show plot
+    plt.show()
+
+    # Plot figure
+    plt.savefig('weights_cbs.png', bbox_inches='tight')
+    plt.close(fig)
+
+def plot_index_column(weighted_freq_cbs, ams_gdf, column_to_plot):
     """
     Plots the selected column from the weighted_freq_cbs GeoDataFrame with the boundary of the area (ams_gdf) on a map.
     
@@ -878,8 +936,9 @@ def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
     plt.show()
 
     # Plot figure
-    plt.savefig('weights_cbs.png', bbox_inches='tight')
+    plt.savefig('index_cbs.png', bbox_inches='tight')
     plt.close(fig)
+
 
 
 
