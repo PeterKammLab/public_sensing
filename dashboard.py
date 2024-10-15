@@ -135,8 +135,9 @@ with tab2:
     # Create options for the selectbox with user-friendly labels
     options = list(label_mapping.keys())
 
-    # Select column to plot using the user-friendly names
-    column_to_plot_label = st.selectbox("Select Attribute", options=options)
+    # Add a unique key to the selectbox
+    column_to_plot_label = st.selectbox("Select Attribute", options=options, key="unique_key_for_selectbox")
+
 
 
     
