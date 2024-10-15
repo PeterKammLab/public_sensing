@@ -91,7 +91,7 @@ with tab2:
 
     # Add a description under the map
     st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>This plot shows amount of measurements for each cell on a specific day</p>",
+        "<p style='color: grey; font-size: 12.5px;'>This plot shows amount of measurements for each cell on a given day</p>",
         unsafe_allow_html=True
     )
 
