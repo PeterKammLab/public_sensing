@@ -161,12 +161,14 @@ with tab3:
     # Create options for the selectbox with user-friendly labels
     options = list(label_mapping.keys())
 
+    st.subheader("Weights & Index for Sensing")
+
     # Select column to plot using the user-friendly names
     column_to_plot_label = st.selectbox("Select Attribute", options=options)
 
     # Get the actual column name for plotting
     column_to_plot = label_mapping[column_to_plot_label]
-    st.subheader("Weights & Index for Sensing")
+    
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
         
