@@ -143,9 +143,12 @@ with tab2:
    # Normalize the weights after loading the frequencies
     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
 
+
+
+# Assuming you have your Streamlit tab setup before this
 with tab3:
-    # Define the mapping of user-friendly names to actual column names
-    label_mapping = {
+    # Define the mapping of user-friendly names to actual column names for index analysis
+    index_label_mapping = {
         'Inhabitants': 'inhab_index',
         'Age 0-15': '0_15_index',
         'Age 15-25': '15_25_index',
@@ -158,19 +161,40 @@ with tab3:
         'Non-West. Migration': 'n_west_m_index'
     }
 
+    # Define the mapping of user-friendly names to actual column names for weighted analysis
+    weighted_label_mapping = {
+        'Inhabitants': 'Weight_inhab',
+        'Age 0-15': 'Weight_0_15',
+        'Age 15-25': 'Weight_15_25',
+        'Age 25-45': 'Weight_25_45',
+        'Age 45-65': 'Weight_45_65',
+        'Age 65+': 'Weight_65+',
+        'Housing Units': 'Weight_woning',
+        'Dutch': 'Weight_nederlan',
+        'West. Migration': 'Weight_west_mig',
+        'Non-West. Migration': 'Weight_n_west_m'
+    }
+
     # Create options for the selectbox with user-friendly labels
-    options = list(label_mapping.keys())
+    options = list(index_label_mapping.keys())
 
     st.subheader("Weights & Index for Sensing")
 
     # Select column to plot using the user-friendly names
     column_to_plot_label = st.selectbox("Select Attribute", options=options)
 
-    # Get the actual column name for plotting
-    column_to_plot = label_mapping[column_to_plot_label]
+    # Get the actual column name for index analysis
+    column_to_plot_index = index_label_mapping[column_to_plot_label]
     
-    # Button to perform frequency analysis and display results
+    # Get the actual column name for weighted analysis
+    column_to_plot_weighted = weighted_label_mapping[column_to_plot_label]
+
+    # Button to perform weighted frequency analysis and display results
     if st.button("Run Weighted Analysis"):
-        
-        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot)  # Use the normalized GeoDataFrame
+        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
         st.image('weights_cbs.png', use_column_width=True)
+
+    # Button to perform index analysis and display results
+    if st.button("Run Index Analysis"):
+        plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
+        st.image('index_cbs.png', use_column_width=True)
