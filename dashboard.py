@@ -107,11 +107,9 @@ with tab2:
     "<p style='color: grey; font-size: 12.5px;'>This graph shows the number of measurements for all cells for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
     unsafe_allow_html=True
     )
-
+    st.subheader("")
+    
     st.markdown("<h6 style='color: black;'>Number of Measurements per Person/Unit (work in progress)</h5>", unsafe_allow_html=True)
-
-
-
   
 
     # Add a description under the map 2
