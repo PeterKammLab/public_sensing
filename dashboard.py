@@ -108,7 +108,8 @@ with tab2:
     unsafe_allow_html=True
     )
 
-    st.subheader("Frequencies for cell (person/unit")
+    st.markdown("<h4 style='color: white;'>Number of measurements per Person/Unit</h4>", unsafe_allow_html=True)
+
 
   
 
