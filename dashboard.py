@@ -110,13 +110,6 @@ with tab2:
     st.subheader("")
     
     st.markdown("<h6 style='color: black;'>Number of Measurements per Person/Unit (work in progress)</h5>", unsafe_allow_html=True)
-  
-
-    # Add a description under the map 2
-    st.markdown(
-    "<p style='color: grey; font-size: 12.5px;'>This map shows the number of measurements per cell for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
-    unsafe_allow_html=True
-    )
 
 
     label_mapping = {
@@ -135,11 +128,17 @@ with tab2:
     # Create options for the selectbox with user-friendly labels
     options = list(label_mapping.keys())
 
+    
+
     # Add a unique key to the selectbox
     column_to_plot_label = st.selectbox("Select Attribute", options=options, key="unique_key_for_selectbox")
 
 
-
+# Add a description under the map 2
+    st.markdown(
+    "<p style='color: grey; font-size: 12.5px;'>This map shows the number of measurements per cell for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
+    unsafe_allow_html=True
+    )
     
    # Normalize the weights after loading the frequencies
     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
