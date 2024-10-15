@@ -195,6 +195,11 @@ with tab3:
     if st.button("Run Weighted Analysis"):
         plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
         st.image('weights_cbs.png', use_column_width=True)
+        # Add a description under the map 2
+        st.markdown(
+        "<p style='color: grey; font-size: 12.5px;'>Weighted value per cell, calculated as the product of the number of measurements and the number of persons/units <br> categorized by a specific sociodemographic attribute on a given day.</p>",
+        unsafe_allow_html=True
+        )
 
     # Button to perform index analysis and display results
     if st.button("Run Index Analysis"):
