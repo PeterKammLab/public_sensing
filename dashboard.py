@@ -108,7 +108,7 @@ with tab2:
     unsafe_allow_html=True
     )
 
-    st.markdown("<h6 style='color: black;'>Sociodemographic Measurements Overview</h5>", unsafe_allow_html=True)
+    st.markdown("<h6 style='color: black;'>Number of Measurements per Person/Unit</h5>", unsafe_allow_html=True)
 
 
 
