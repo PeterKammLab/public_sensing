@@ -110,15 +110,7 @@ with tab2:
 
     st.subheader("Frequencies for cell (person/unit")
 
-    st.markdown(
-    "<p style='color: grey; font-size: 12.5px;'> </p>",
-    unsafe_allow_html=True
-    )    
-
-    st.markdown(
-    "<p style='color: grey; font-size: 12.5px;'> </p>",
-    unsafe_allow_html=True
-    )    
+  
 
     # Add a description under the map 2
     st.markdown(
