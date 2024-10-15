@@ -166,9 +166,9 @@ with tab3:
 
     # Get the actual column name for plotting
     column_to_plot = label_mapping[column_to_plot_label]
-
+    st.subheader("Weights & Index for Sensing")
     # Button to perform frequency analysis and display results
     if st.button("Run Weighted Analysis"):
-        st.subheader("Frequency Visualization")
+        
         plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot)  # Use the normalized GeoDataFrame
         st.image('weights_cbs.png', use_column_width=True)
