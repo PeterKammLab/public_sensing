@@ -82,7 +82,7 @@ with tab2:
     # Add the text with specified bold formatting
      # Display initial map
     
-    st.markdown("based on real-time GTFS data, **GVB trams** * **buses** for **13th March 2024** in Amsterdam")
+    st.markdown("based on real-time GTFS data, **GVB trams** & **buses** for **13th March 2024** in Amsterdam")
 
     st.subheader("")
     
@@ -157,7 +157,7 @@ with tab2:
 # Assuming you have your Streamlit tab setup before this
 with tab3:
 
-    st.markdown("based on real-time GTFS data, **GVB trams** * **buses** for **13th March 2024** in Amsterdam")
+    st.markdown("based on real-time GTFS data, **GVB trams** & **buses** for **13th March 2024** in Amsterdam")
 
     st.subheader("")
     # Define the mapping of user-friendly names to actual column names for index analysis
@@ -218,6 +218,6 @@ with tab3:
         st.image('weights_cbs.png', use_column_width=True)
         # Add a description under the map 2
         st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>**'Sensing Index'** representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
+        "<p style='color: grey; font-size: 12.5px;'>'Sensing Index' representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
         unsafe_allow_html=True
         )
