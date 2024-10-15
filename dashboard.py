@@ -80,6 +80,9 @@ with tab1:
 with tab2:
     # Add an h6 Markdown title
     # Add the text with specified bold formatting
+     # Display initial map
+    st.subheader("")
+    
     st.markdown("Based on real-time GTFS data, **GVB trams**, **buses**, and **13th March 2024** in Amsterdam.")
     
     # Define the fixed file path
@@ -88,8 +91,7 @@ with tab2:
     # Process frequencies using the fixed file path
     weighted_freq_cbs, ratios_df, freq_cbs = process_frequencies(file_path)
 
-     # Display initial map
-    st.subheader("")
+    
     plot_counts(weighted_freq_cbs, ams_gdf)
     st.image('counts_cbs.png', use_column_width=True)
 
