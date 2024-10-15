@@ -189,12 +189,18 @@ with tab3:
     # Get the actual column name for weighted analysis
     column_to_plot_weighted = weighted_label_mapping[column_to_plot_label]
 
+    # Create two columns for buttons
+    col1, col2 = st.columns(2)
+
     # Button to perform weighted frequency analysis and display results
-    if st.button("Run Weighted Analysis"):
-        plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
-        st.image('weights_cbs.png', use_column_width=True)
+    with col1:
+        if st.button("Run Weighted Analysis"):
+            plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use weighted_freq_cbs as input
+            st.image('weights_cbs.png', use_column_width=True)
 
     # Button to perform index analysis and display results
-    if st.button("Run Index Analysis"):
-        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
-        st.image('weights_cbs.png', use_column_width=True)
+    with col2:
+        if st.button("Run Index Analysis"):
+            plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use normalized_gdf as input
+            st.image('weights_cbs.png', use_column_width=True)
+
