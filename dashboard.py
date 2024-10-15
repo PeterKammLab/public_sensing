@@ -194,7 +194,7 @@ with tab3:
     #st.subheader("Weights & Index for Sensing")
 
     # Select column to plot using the user-friendly names
-    column_to_plot_label = st.selectbox("Select Attribute", options=options)
+    column_to_plot_label = st.radio("Select Attribute", options=options)
 
     # Get the actual column name for index analysis
     column_to_plot_index = index_label_mapping[column_to_plot_label]
