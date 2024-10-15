@@ -81,9 +81,10 @@ with tab2:
     # Add an h6 Markdown title
     # Add the text with specified bold formatting
      # Display initial map
-    st.subheader("")
     
     st.markdown("Based on real-time GTFS data, **GVB trams**, **buses**, and **13th March 2024** in Amsterdam.")
+
+    st.subheader("")
     
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
@@ -155,6 +156,10 @@ with tab2:
 
 # Assuming you have your Streamlit tab setup before this
 with tab3:
+
+    st.markdown("Based on real-time GTFS data, **GVB trams**, **buses**, and **13th March 2024** in Amsterdam.")
+
+    st.subheader("")
     # Define the mapping of user-friendly names to actual column names for index analysis
     index_label_mapping = {
         'Inhabitants': 'inhab_index',
