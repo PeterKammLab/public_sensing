@@ -104,10 +104,10 @@ with tab2:
 
      # Add a description under the map
     st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>This graph shows the number of measurements per cell for each individual or unit, <br> 
-        categorized by a specific sociodemographic attribute, on a given day</p>",
-        unsafe_allow_html=True
-    )
+    "<p style='color: grey; font-size: 12.5px;'>This graph shows the number of measurements per cell for each individual or unit, categorized by a specific sociodemographic attribute on a given day.</p>",
+    unsafe_allow_html=True
+)
+
 
     
    # Normalize the weights after loading the frequencies
