@@ -79,7 +79,8 @@ with tab1:
 
 with tab2:
     # Add an h6 Markdown title
-    st.markdown("###### GVB trams and buses in Amsterdam on 13th March 2024")
+    # Add the text with specified bold formatting
+    st.markdown("Based on real-time GTFS data, **GVB trams**, **buses**, and **13th March 2024** in Amsterdam.")
     
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
