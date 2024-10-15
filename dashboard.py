@@ -205,3 +205,8 @@ with tab3:
     if st.button("Run Index Analysis"):
         plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
         st.image('weights_cbs.png', use_column_width=True)
+        # Add a description under the map 2
+        st.markdown(
+        "<p style='color: grey; font-size: 12.5px;'>**'Sensing Index'** representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
+        unsafe_allow_html=True
+        )
