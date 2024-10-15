@@ -91,7 +91,7 @@ with tab2:
 
     # Add a description under the map
     st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>This plot shows amount of measurements for each sell on a specific day.</p>",
+        "<p style='color: grey; font-size: 12.5px;'>This plot shows amount of measurements for each cell on a specific day</p>",
         unsafe_allow_html=True
     )
 
@@ -101,6 +101,14 @@ with tab2:
     st.subheader("")
     plot_ratios_comparison(ratios_df)
     st.image('ratios.png', use_column_width=True)
+
+     # Add a description under the map
+    st.markdown(
+        "<p style='color: grey; font-size: 12.5px;'>This graph shows the number of measurements per cell for each individual or unit, <br> 
+        categorized by a specific sociodemographic attribute, on a given day</p>",
+        unsafe_allow_html=True
+    )
+
     
    # Normalize the weights after loading the frequencies
     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
