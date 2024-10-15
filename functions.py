@@ -869,7 +869,7 @@ def plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot):
                            edgecolor='white', linewidth=0.35)
 
     # Add title and labels
-    ax.set_title(f'Measurments x Units / Sum Units ({column_to_plot})', fontweight='bold', fontsize=12)
+    ax.set_title(f'Measurements x Units / Sum Units ({column_to_plot})', fontweight='bold', fontsize=12)
     
     # Remove X and Y axes
     ax.set_axis_off()
