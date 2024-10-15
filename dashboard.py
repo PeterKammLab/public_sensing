@@ -191,10 +191,10 @@ with tab3:
 
     # Button to perform weighted frequency analysis and display results
     if st.button("Run Weighted Analysis"):
-        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
+        plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
         st.image('weights_cbs.png', use_column_width=True)
 
     # Button to perform index analysis and display results
     if st.button("Run Index Analysis"):
-        plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
-        st.image('index_cbs.png', use_column_width=True)
+        plot_weighted_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
+        st.image('weights_cbs.png', use_column_width=True)
