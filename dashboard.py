@@ -108,7 +108,7 @@ with tab2:
     unsafe_allow_html=True
     )
 
-    st.markdown("<h4 style='color: white;'>Number of measurements per Person/Unit</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: black;'>Number of measurements per Person/Unit</h4>", unsafe_allow_html=True)
 
 
   
