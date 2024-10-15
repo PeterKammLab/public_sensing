@@ -78,6 +78,9 @@ with tab1:
         st.write(merged_df)
 
 with tab2:
+    # Add an h6 Markdown title
+    st.markdown("###### GVB trams and buses in Amsterdam on 13th March 2024")
+    
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
 
