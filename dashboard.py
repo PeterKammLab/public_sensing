@@ -84,7 +84,7 @@ with tab2:
     
     st.markdown("based on real-time GTFS data, **GVB trams** * **buses** for **13th March 2024** in Amsterdam")
 
-    #st.subheader("")
+    st.subheader("")
     
     # Define the fixed file path
     file_path = "freq_cbs_1304_fullday.shp"
@@ -159,7 +159,7 @@ with tab3:
 
     st.markdown("based on real-time GTFS data, **GVB trams** * **buses** for **13th March 2024** in Amsterdam")
 
-    #st.subheader("")
+    st.subheader("")
     # Define the mapping of user-friendly names to actual column names for index analysis
     index_label_mapping = {
         'Inhabitants': 'inhab_index',
