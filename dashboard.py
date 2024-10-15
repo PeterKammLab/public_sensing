@@ -24,7 +24,7 @@ cbs_filepath = 'cbs_amsterdam_2021_clean.shp'
 st.title("Public Transport Sensing")
 
 # Use tabs instead of sidebar
-tab1, tab2, tab3 = st.tabs(["**Analysis**", "**Frequencies**", "**Weights**"])
+tab1, tab2, tab3 = st.tabs(["**Analysis**", "**Frequencies**", "**Weights & Index**"])
 
 with tab1:
     # User input for transport type
@@ -180,7 +180,7 @@ with tab3:
     # Create options for the selectbox with user-friendly labels
     options = list(index_label_mapping.keys())
 
-    st.subheader("Weights & Index for Sensing")
+    #st.subheader("Weights & Index for Sensing")
 
     # Select column to plot using the user-friendly names
     column_to_plot_label = st.selectbox("Select Attribute", options=options)
