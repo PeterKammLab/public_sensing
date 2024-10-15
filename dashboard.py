@@ -108,15 +108,40 @@ with tab2:
     unsafe_allow_html=True
     )
 
+
+
+     label_mapping = {
+        'Inhabitants': 'inhab_index',
+        'Age 0-15': '0_15_index',
+        'Age 15-25': '15_25_index',
+        'Age 25-45': '25_45_index',
+        'Age 45-65': '45_65_index',
+        'Age 65+': '65+_index',
+        'Housing Units': 'woning_index',
+        'Dutch': 'nederlan_index',
+        'West. Migration': 'west_mig_index',
+        'Non-West. Migration': 'n_west_m_index'
+    }
+
+    # Create options for the selectbox with user-friendly labels
+    options = list(label_mapping.keys())
+ 
     st.markdown(
     "<p style='color: grey; font-size: 12.5px;'> </p>",
     unsafe_allow_html=True
-)
+    )    
+
+    st.markdown(
+    "<p style='color: grey; font-size: 12.5px;'> </p>",
+    unsafe_allow_html=True
+    )    
+
+    
     # Add a description under the map 2
     st.markdown(
     "<p style='color: grey; font-size: 12.5px;'>This map shows the number of measurements per cell for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
     unsafe_allow_html=True
-)
+    )
 
 
     
