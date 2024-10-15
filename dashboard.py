@@ -108,7 +108,7 @@ with tab2:
     unsafe_allow_html=True
     )
 
-     st.markdown(
+    st.markdown(
     "<p style='color: grey; font-size: 12.5px;'> </p>",
     unsafe_allow_html=True
 )
