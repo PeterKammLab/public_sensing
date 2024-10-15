@@ -110,7 +110,7 @@ with tab2:
 
 
 
-     label_mapping = {
+    label_mapping = {
         'Inhabitants': 'inhab_index',
         'Age 0-15': '0_15_index',
         'Age 15-25': '15_25_index',
