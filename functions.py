@@ -811,7 +811,7 @@ def plot_counts(weighted_freq_cbs, ams_gdf):
                            edgecolor='white', linewidth=0.35)
     
     # Add title and labels
-    ax.set_title('Frequency Map - Amount of Measurements', fontweight='bold', fontsize=12)
+    ax.set_title('Number of Measurements', fontweight='bold', fontsize=12)
     
     # Remove X and Y axes
     ax.set_axis_off()
