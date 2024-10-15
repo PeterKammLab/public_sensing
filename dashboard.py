@@ -91,11 +91,11 @@ with tab2:
 
     # Add a description under the map
     st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>This plot compares demographic ratios across various sociodemographic metrics,<br> "
-        "providing insights into the distribution and relationships within the data.</p>",
+        "<p style='color: grey; font-size: 12.5px;'>This plot shows amount of measurements for each sell on a specific day.</p>",
         unsafe_allow_html=True
     )
 
+    #<br>
     
     # Display initial map and ratios DataFrame
     st.subheader("")
