@@ -119,6 +119,26 @@ with tab2:
     )
 
 
+    label_mapping = {
+        'Inhabitants': 'inhab_index',
+        'Age 0-15': '0_15_index',
+        'Age 15-25': '15_25_index',
+        'Age 25-45': '25_45_index',
+        'Age 45-65': '45_65_index',
+        'Age 65+': '65+_index',
+        'Housing Units': 'woning_index',
+        'Dutch': 'nederlan_index',
+        'West. Migration': 'west_mig_index',
+        'Non-West. Migration': 'n_west_m_index'
+    }
+
+    # Create options for the selectbox with user-friendly labels
+    options = list(label_mapping.keys())
+
+    # Select column to plot using the user-friendly names
+    column_to_plot_label = st.selectbox("Select Attribute", options=options)
+
+
     
    # Normalize the weights after loading the frequencies
     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
