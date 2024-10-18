@@ -14,6 +14,7 @@ from shapely.geometry import Point, Polygon
 import matplotlib.lines as mlines
 from matplotlib.colors import LinearSegmentedColormap
 import mapclassify
+import streamlit.components.v1 as components
 
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
