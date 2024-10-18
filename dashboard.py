@@ -37,14 +37,14 @@ if st.session_state['landing_page']:
     # Add an 'Enter' button to move past the landing page
     if st.button('Run sensing, run!'):
         st.session_state['landing_page'] = False
-
-    # Add the tram.gif below the description with a specified width
-    st.image("Tram.gif", use_column_width='auto')
     
     # Add a simplified description before the GIF
     st.write("""
     This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
     """)
+
+    # Add the tram.gif below the description with a specified width
+    st.image("Tram.gif", use_column_width='auto')
 
 # Main project content after 'Enter' button is pressed
 else: 
