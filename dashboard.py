@@ -30,14 +30,15 @@ if st.session_state['landing_page']:
      #   "<h1 style='font-family: Arial, sans-serif; color: white;'>Welcome to the Urban Sensing Dashboard</h1>",
      #   unsafe_allow_html=True
     #)
-
+      # Add the tram.gif below the description with a specified width
+    st.image("Tram.gif", use_column_width='auto')
+    
     # Add a simplified description before the GIF
     st.write("""
     This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
     """)
 
-    # Add the tram.gif below the description with a specified width
-    st.image("Tram.gif", use_column_width='auto')
+  
 
     # Add an 'Enter' button to move past the landing page
     if st.button('Run sensing, run!'):
