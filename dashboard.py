@@ -55,7 +55,7 @@ if st.session_state['landing_page']:
     """)
 
     # Add the tram.gif below the description
-    st.image("tram.gif", use_column_width='auto')
+    st.image("Tram.gif", use_column_width='auto')
 
     # Add an 'Enter' button to move past the landing page
     if st.button('Enter'):
