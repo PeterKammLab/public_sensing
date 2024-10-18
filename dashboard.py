@@ -22,6 +22,9 @@ import streamlit.components.v1 as components
 import streamlit as st
 import streamlit.components.v1 as components
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
     st.session_state['landing_page'] = True
@@ -43,10 +46,18 @@ if st.session_state['landing_page']:
         """, height=400
     )
 
-    # Add the GIF below the title
-    st.image("ClubingDance.gif", use_column_width='auto', caption="ronimo ronimo")
+    # Add the Giphy iframe below the title
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <iframe src="https://giphy.com/embed/LQZGApU9HfEZTxsFht" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            <p><a href="https://giphy.com/gifs/rolandzeiner-bim-linien-s-bahn-LQZGApU9HfEZTxsFht">via GIPHY</a></p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    # Add a simplified description before the button
+    # Add a simplified description before the button, with less padding
     st.write("""
     This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
     """)
