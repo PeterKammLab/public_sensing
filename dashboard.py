@@ -16,25 +16,19 @@ from matplotlib.colors import LinearSegmentedColormap
 import mapclassify
 import streamlit.components.v1 as components
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
     st.session_state['landing_page'] = True
 
 # Display the landing page with animation
 if st.session_state['landing_page']:
-    # Embedding custom HTML for animation (adjust as needed)
-    components.html(
-        """
-        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; padding: 0;">
-            <h1 style="font-family: Arial, sans-serif; color: white;">Welcome to the Urban Sensing Dashboard</h1>
-            <style>
-                @keyframes spin {
-                    from {transform: rotate(0deg);}
-                    to {transform: rotate(360deg);}
-                }
-            </style>
-        </div>
-        """, height=400
+    # Add the header directly using Streamlit
+    st.markdown(
+        "<h1 style='font-family: Arial, sans-serif; color: white;'>Welcome to the Urban Sensing Dashboard</h1>",
+        unsafe_allow_html=True
     )
 
     # Add an 'Enter' button to move past the landing page
@@ -48,6 +42,8 @@ if st.session_state['landing_page']:
 
     # Add the tram.gif below the description
     st.image("Tram.gif", use_column_width='auto')
+
+
 
 # Main project content after 'Enter' button is pressed
 else: 
