@@ -16,18 +16,6 @@ from matplotlib.colors import LinearSegmentedColormap
 import mapclassify
 import streamlit.components.v1 as components
 
-import streamlit as st
-import streamlit.components.v1 as components
-
-import streamlit as st
-import streamlit.components.v1 as components
-
-import streamlit as st
-import streamlit.components.v1 as components
-
-import streamlit as st
-import streamlit.components.v1 as components
-
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
     st.session_state['landing_page'] = True
@@ -37,7 +25,7 @@ if st.session_state['landing_page']:
     # Embedding custom HTML for animation (adjust as needed)
     components.html(
         """
-        <div style="text-align: center; padding: 50px;">
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; padding: 0;">
             <h1 style="font-family: Arial, sans-serif; color: white;">Welcome to the Urban Sensing Dashboard</h1>
             <style>
                 @keyframes spin {
@@ -49,7 +37,6 @@ if st.session_state['landing_page']:
         """, height=400
     )
 
-    
     # Add an 'Enter' button to move past the landing page
     if st.button('Run sensing, run!'):
         st.session_state['landing_page'] = False
