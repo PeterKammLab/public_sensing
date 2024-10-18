@@ -26,10 +26,10 @@ if 'landing_page' not in st.session_state:
 # Display the landing page with animation
 if st.session_state['landing_page']:
     # Add the header directly using Streamlit
-    st.markdown(
-        "<h1 style='font-family: Arial, sans-serif; color: white;'>Welcome to the Urban Sensing Dashboard</h1>",
-        unsafe_allow_html=True
-    )
+    #st.markdown(
+     #   "<h1 style='font-family: Arial, sans-serif; color: white;'>Welcome to the Urban Sensing Dashboard</h1>",
+     #   unsafe_allow_html=True
+    #)
 
     # Add a simplified description before the GIF
     st.write("""
@@ -37,7 +37,7 @@ if st.session_state['landing_page']:
     """)
 
     # Add the tram.gif below the description with a specified width
-    st.image("Tram.gif", width=300)  # Adjust width as needed
+    st.image("Tram.gif", use_column_width='auto')
 
     # Add an 'Enter' button to move past the landing page
     if st.button('Run sensing, run!'):
