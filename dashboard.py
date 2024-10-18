@@ -46,12 +46,11 @@ if st.session_state['landing_page']:
         """, height=400
     )
 
-    # Add the Giphy iframe below the title
+   # Add the Giphy iframe below the title without the link
     st.markdown(
         """
         <div style="text-align: center;">
             <iframe src="https://giphy.com/embed/LQZGApU9HfEZTxsFht" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-            <p><a href="https://giphy.com/gifs/rolandzeiner-bim-linien-s-bahn-LQZGApU9HfEZTxsFht">via GIPHY</a></p>
         </div>
         """,
         unsafe_allow_html=True
