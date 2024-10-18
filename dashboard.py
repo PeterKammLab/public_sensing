@@ -25,6 +25,9 @@ import streamlit.components.v1 as components
 import streamlit as st
 import streamlit.components.v1 as components
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
     st.session_state['landing_page'] = True
@@ -46,20 +49,13 @@ if st.session_state['landing_page']:
         """, height=400
     )
 
-   # Add the Giphy iframe below the title without the link
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <iframe src="https://giphy.com/embed/LQZGApU9HfEZTxsFht" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Add a simplified description before the button, with less padding
+    # Add a simplified description before the GIF
     st.write("""
     This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
     """)
+
+    # Add the tram.gif below the description
+    st.image("tram.gif", use_column_width='auto')
 
     # Add an 'Enter' button to move past the landing page
     if st.button('Enter'):
