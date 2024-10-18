@@ -37,7 +37,7 @@ if st.session_state['landing_page']:
     
     # Add a simplified description before the GIF
     st.write("""
-    This research looks at how we can collect data using sensors on public transport. We aim to find the best vehicles (trams and buses) to put a limited number of sensors on. By using GTFS data, which tells us the schedules and exact locations of every vehicle, we can figure which vehicles cover as much area as possible. Our goal is to create a smart system that decides which buses and trams should have sensors, helping us get more accurate measurements,  reach more people but also sense in an equitable manner. 
+    This research looks at how we can collect data using sensors on public transport vehicles. We aim to identify the trams and buses to put a limited number of sensors on. By using GTFS data, which tells us the schedules and exact locations of every vehicle, we can figure which vehicles cover as much area as possible. Our goal is to create a smart system that decides which buses and trams should have sensors, helping us get more accurate measurements,  reach more people but also sense in an equitable manner. 
     """)
 
     # Add the tram.gif below the description with a specified width
