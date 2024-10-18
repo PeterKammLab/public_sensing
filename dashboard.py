@@ -19,19 +19,20 @@ import streamlit.components.v1 as components
 import streamlit as st
 import streamlit.components.v1 as components
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 # Session state to control what to display
 if 'landing_page' not in st.session_state:
     st.session_state['landing_page'] = True
 
 # Display the landing page with animation
 if st.session_state['landing_page']:
-    # Embedding custom HTML/CSS for animation (adjust as needed)
+    # Embedding custom HTML for animation (adjust as needed)
     components.html(
         """
         <div style="text-align: center; padding: 50px;">
             <h1 style="font-family: Arial, sans-serif; color: white;">Welcome to the Urban Sensing Dashboard</h1>
-            <div style="width: 100px; height: 100px; background-color: blue; border-radius: 50%;
-                        animation: spin 2s linear infinite;"></div>
             <style>
                 @keyframes spin {
                     from {transform: rotate(0deg);}
@@ -42,12 +43,24 @@ if st.session_state['landing_page']:
         """, height=400
     )
 
-    # Add the GIF below the animation
+    # Add the GIF below the title
     st.image("ClubingDance.gif", use_column_width='auto', caption="ronimo ronimo")
-    
+
+    # Add a simplified description before the button
+    st.write("""
+    This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
+    """)
+
     # Add an 'Enter' button to move past the landing page
     if st.button('Enter'):
         st.session_state['landing_page'] = False
+
+# Main project content after 'Enter' button is pressed
+else:
+    st.title("Public Transport Sensing")
+    st.write("""
+    This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
+    """)
 
 
 # Main project content after 'Enter' button is pressed
