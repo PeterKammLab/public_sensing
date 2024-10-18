@@ -37,7 +37,7 @@ if st.session_state['landing_page']:
     
     # Add a simplified description before the GIF
     st.write("""
-    This research assesses sensing coverage using real-time public transport data. Instead of modeling how often to sense, we explore optimal deployment scenarios for a limited number of sensors. By leveraging vehicle IDs and GTFS data, we determine exact sensor locations, aiming to maximize coverage. Our goal is to develop an algorithm that optimizes sensor placement on public transport vehicles for the best frequency of measurements and spatial/population coverage.
+    This research looks at how we can collect data using sensors on public transport. We aim to find the best vehicles (trams and buses) to put a limited number of sensors on. By using GTFS data, which tells us the schedules and exact locations of every vehicle, we can figure which vehicles cover as much area as possible. Our goal is to create a smart system that decides which buses and trams should have sensors, helping us get more accurate measurements,  reach more people but also sense in an equitable manner. 
     """)
 
     # Add the tram.gif below the description with a specified width
