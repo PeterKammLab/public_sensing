@@ -142,29 +142,54 @@ def spatial_join_and_remove_duplicates(cbs_gdf, buffered_lines, how='inner', pre
     return joined_gdf
 
 
+# def generate_summary_statistics(cbs_gdf):
+#     """
+#     Calculates summary statistics from the CBS GeoDataFrame, excluding specified columns,
+#     and formats the results into a summary DataFrame.
+
+#     Parameters:
+#         cbs_gdf (gpd.GeoDataFrame): GeoDataFrame containing CBS data.
+
+#     Returns:
+#         pd.DataFrame: A DataFrame containing the summary statistics.
+#     """
+#     # # Calculate the sum for numeric columns excluding 'G_woz_woni' and 'geometry'
+#     # sum_values = cbs_gdf.drop(columns=['geometry', 'G_woz_woni']).sum()
+    
+#     # Calculate the average for 'G_woz_woni'
+#     average_woz_woni = cbs_gdf['G_woz_woni'].mean()
+    
+#     # Round the sums and average to zero decimal places
+#     sum_values = pd.to_numeric(sum_values, errors='coerce') # added new 
+#     rounded_sum_values = sum_values.round(0) # added new 
+#     rounded_average_woz_woni = round(average_woz_woni, 0)
+    
+#     # Create the summary row DataFrame
+#     summary_row_ams = pd.DataFrame({
+#         'Area': ['Amsterdam'],
+#         'A_inhab': [rounded_sum_values.get('A_inhab', 0)],
+#         'A_0_15': [rounded_sum_values.get('A_0_15', 0)],
+#         'A_15_25': [rounded_sum_values.get('A_15_25', 0)],
+#         'A_25_45': [rounded_sum_values.get('A_25_45', 0)],
+#         'A_45_65': [rounded_sum_values.get('A_45_65', 0)],
+#         'A_65+': [rounded_sum_values.get('A_65+', 0)],
+#         'A_woning': [rounded_sum_values.get('A_woning', 0)],
+#         'G_woz_woni': [rounded_average_woz_woni],
+#         'A_nederlan': [rounded_sum_values.get('A_nederlan', 0)],
+#         'A_west_mig': [rounded_sum_values.get('A_west_mig', 0)],
+#         'A_n_west_m': [rounded_sum_values.get('A_n_west_m', 0)],
+#     })
+
+#     return summary_row_ams
+
 def generate_summary_statistics(cbs_gdf):
-    """
-    Calculates summary statistics from the CBS GeoDataFrame, excluding specified columns,
-    and formats the results into a summary DataFrame.
+    # Select only numeric columns except 'G_woz_woni'
+    numeric_cols = cbs_gdf.select_dtypes(include='number').columns.drop('G_woz_woni')
+    # Sum and round values
+    rounded_sum_values = cbs_gdf[numeric_cols].sum().round(0)
+    # Calculate average for 'G_woz_woni'
+    rounded_average_woz_woni = round(cbs_gdf['G_woz_woni'].mean(), 0)
 
-    Parameters:
-        cbs_gdf (gpd.GeoDataFrame): GeoDataFrame containing CBS data.
-
-    Returns:
-        pd.DataFrame: A DataFrame containing the summary statistics.
-    """
-    # Calculate the sum for numeric columns excluding 'G_woz_woni' and 'geometry'
-    sum_values = cbs_gdf.drop(columns=['geometry', 'G_woz_woni']).sum()
-    
-    # Calculate the average for 'G_woz_woni'
-    average_woz_woni = cbs_gdf['G_woz_woni'].mean()
-    
-    # Round the sums and average to zero decimal places
-    sum_values = pd.to_numeric(sum_values, errors='coerce') # added new 
-    rounded_sum_values = sum_values.round(0) # added new 
-    rounded_average_woz_woni = round(average_woz_woni, 0)
-    
-    # Create the summary row DataFrame
     summary_row_ams = pd.DataFrame({
         'Area': ['Amsterdam'],
         'A_inhab': [rounded_sum_values.get('A_inhab', 0)],
@@ -183,34 +208,61 @@ def generate_summary_statistics(cbs_gdf):
     return summary_row_ams
 
 
+
+# def generate_summary_statistics_for_sensed_data(joined_gdf):
+#     """
+#     Generates summary statistics for a GeoDataFrame by calculating sums for numeric columns,
+#     calculating the average for a specific column, and formatting the results into a summary DataFrame.
+    
+#     The function excludes the columns 'crs28992', 'G_woz_woni', and 'geometry' from summation,
+#     and calculates the average for the 'G_woz_woni' column.
+    
+#     Parameters:
+#         gdf (gpd.GeoDataFrame): GeoDataFrame containing the data.
+
+#     Returns:
+#         pd.DataFrame: A DataFrame containing the summary statistics.
+#     """
+
+#     # Calculate the sum for numeric columns excluding specified columns
+#     sum_values = joined_gdf.drop(columns=['geometry', 'G_woz_woni']).sum()
+    
+#     # Calculate the average for the specified column
+#     average_value = joined_gdf['G_woz_woni'].mean()
+    
+#     # Round the sums and average to zero decimal places
+#     rounded_sum_values = sum_values.round(0)
+#     rounded_average_value = round(average_value, 0)
+    
+#     # Create the summary row DataFrame
+#     summary_row = pd.DataFrame({
+#         'Area': ['Sensed Area'],  # Customize this label if needed
+#         'A_inhab': [rounded_sum_values.get('A_inhab', 0)],
+#         'A_0_15': [rounded_sum_values.get('A_0_15', 0)],
+#         'A_15_25': [rounded_sum_values.get('A_15_25', 0)],
+#         'A_25_45': [rounded_sum_values.get('A_25_45', 0)],
+#         'A_45_65': [rounded_sum_values.get('A_45_65', 0)],
+#         'A_65+': [rounded_sum_values.get('A_65+', 0)],
+#         'A_woning': [rounded_sum_values.get('A_woning', 0)],
+#         'G_woz_woni': [rounded_average_value],
+#         'A_nederlan': [rounded_sum_values.get('A_nederlan', 0)],
+#         'A_west_mig': [rounded_sum_values.get('A_west_mig', 0)],
+#         'A_n_west_m': [rounded_sum_values.get('A_n_west_m', 0)],
+#     })
+
+#     return summary_row
+
+
 def generate_summary_statistics_for_sensed_data(joined_gdf):
-    """
-    Generates summary statistics for a GeoDataFrame by calculating sums for numeric columns,
-    calculating the average for a specific column, and formatting the results into a summary DataFrame.
-    
-    The function excludes the columns 'crs28992', 'G_woz_woni', and 'geometry' from summation,
-    and calculates the average for the 'G_woz_woni' column.
-    
-    Parameters:
-        gdf (gpd.GeoDataFrame): GeoDataFrame containing the data.
+    # Select only numeric columns except 'G_woz_woni'
+    numeric_cols = joined_gdf.select_dtypes(include='number').columns.drop('G_woz_woni')
+    # Sum and round values
+    rounded_sum_values = joined_gdf[numeric_cols].sum().round(0)
+    # Calculate average for 'G_woz_woni'
+    rounded_average_value = round(joined_gdf['G_woz_woni'].mean(), 0)
 
-    Returns:
-        pd.DataFrame: A DataFrame containing the summary statistics.
-    """
-
-    # Calculate the sum for numeric columns excluding specified columns
-    sum_values = joined_gdf.drop(columns=['geometry', 'G_woz_woni']).sum()
-    
-    # Calculate the average for the specified column
-    average_value = joined_gdf['G_woz_woni'].mean()
-    
-    # Round the sums and average to zero decimal places
-    rounded_sum_values = sum_values.round(0)
-    rounded_average_value = round(average_value, 0)
-    
-    # Create the summary row DataFrame
     summary_row = pd.DataFrame({
-        'Area': ['Sensed Area'],  # Customize this label if needed
+        'Area': ['Sensed Area'],
         'A_inhab': [rounded_sum_values.get('A_inhab', 0)],
         'A_0_15': [rounded_sum_values.get('A_0_15', 0)],
         'A_15_25': [rounded_sum_values.get('A_15_25', 0)],
