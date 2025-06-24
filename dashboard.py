@@ -114,7 +114,7 @@ else:
         # Add the text with specified bold formatting
          # Display initial map
         
-        st.markdown("based on real-time GTFS data, **GVB trams** & **buses** for **13th March 2024** in Amsterdam")
+        st.markdown("Here you can see the frequencies (measurements per cell) based on real-time GTFS data, **GVB trams** & **buses** for **13th March 2024** in Amsterdam")
     
         st.subheader("")
         
@@ -147,40 +147,41 @@ else:
         unsafe_allow_html=True
         )
         st.subheader("")
+
+        # Excluded! 
+        # st.markdown("<h6 style='color: black;'>Number of Measurements per Person/Unit (work in progress)</h5>", unsafe_allow_html=True)
+    
+    
+        # label_mapping = {
+        #     'Inhabitants': 'inhab_index',
+        #     'Age 0-15': '0_15_index',
+        #     'Age 15-25': '15_25_index',
+        #     'Age 25-45': '25_45_index',
+        #     'Age 45-65': '45_65_index',
+        #     'Age 65+': '65+_index',
+        #     'Housing Units': 'woning_index',
+        #     'Dutch': 'nederlan_index',
+        #     'West. Migration': 'west_mig_index',
+        #     'Non-West. Migration': 'n_west_m_index'
+        # }
+    
+        # # Create options for the selectbox with user-friendly labels
+        # options = list(label_mapping.keys())
+    
+    
+
+        # # Add a unique key to the selectbox
+        # column_to_plot_label = st.selectbox("Select Attribute", options=options, key="unique_key_for_selectbox")
+    
+    
+    # # Add a description under the map 2
+    #     st.markdown(
+    #     "<p style='color: grey; font-size: 12.5px;'>This map shows the number of measurements per cell for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
+    #     unsafe_allow_html=True
+    #     )
         
-        st.markdown("<h6 style='color: black;'>Number of Measurements per Person/Unit (work in progress)</h5>", unsafe_allow_html=True)
-    
-    
-        label_mapping = {
-            'Inhabitants': 'inhab_index',
-            'Age 0-15': '0_15_index',
-            'Age 15-25': '15_25_index',
-            'Age 25-45': '25_45_index',
-            'Age 45-65': '45_65_index',
-            'Age 65+': '65+_index',
-            'Housing Units': 'woning_index',
-            'Dutch': 'nederlan_index',
-            'West. Migration': 'west_mig_index',
-            'Non-West. Migration': 'n_west_m_index'
-        }
-    
-        # Create options for the selectbox with user-friendly labels
-        options = list(label_mapping.keys())
-    
-        
-    
-        # Add a unique key to the selectbox
-        column_to_plot_label = st.selectbox("Select Attribute", options=options, key="unique_key_for_selectbox")
-    
-    
-    # Add a description under the map 2
-        st.markdown(
-        "<p style='color: grey; font-size: 12.5px;'>This map shows the number of measurements per cell for each individual or unit, <br> categorized by a specific sociodemographic attribute on a given day.</p>",
-        unsafe_allow_html=True
-        )
-        
-       # Normalize the weights after loading the frequencies
-        normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
+    #    # Normalize the weights after loading the frequencies
+    #     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
     
     
     
