@@ -188,7 +188,7 @@ else:
     # Assuming you have your Streamlit tab setup before this
     with tab3:
     
-        st.markdown("We appply several optimization in order to find the best limited vehicles (N) to place sensors on. These include among others -  spatial (maximal coverage), temporal (highest frequencies) and fairness (equal sociodemographics) optimizations."
+        st.markdown("We appply several optimization in order to find the best limited vehicles (N) to place sensors on. These include among others -  spatial (maximal coverage), temporal (highest frequencies) and fairness (equal sociodemographics) optimizations.")
     
         st.subheader("")
         # Define the mapping of user-friendly names to actual column names for index analysis
