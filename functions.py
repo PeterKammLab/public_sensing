@@ -160,7 +160,8 @@ def generate_summary_statistics(cbs_gdf):
     average_woz_woni = cbs_gdf['G_woz_woni'].mean()
     
     # Round the sums and average to zero decimal places
-    rounded_sum_values = sum_values.round(0)
+    sum_values = pd.to_numeric(sum_values, errors='coerce') # added new 
+    rounded_sum_values = sum_values.round(0) # added new 
     rounded_average_woz_woni = round(average_woz_woni, 0)
     
     # Create the summary row DataFrame
