@@ -43,7 +43,7 @@ if st.session_state['landing_page']:
     """)
 
     # Add the tram.gif below the description with a specified width
-    st.image("Tram.gif", use_column_width='auto')
+    st.image("Tram.gif",  use_container_width=True)
 
 # Main project content after 'Enter' button is pressed
 else: 
@@ -97,13 +97,13 @@ else:
     
             # Display results
             plot_transport_and_population(lines, cbs, sensed_cbs, ams_gdf, buffer_distance, transport_type)
-            st.image('transport_population_plot.png', use_column_width=True)
+            st.image('transport_population_plot.png',  use_container_width=True)
             
             plot_sums_and_percentages(comparison_df, buffer_distance)
-            st.image('sums_percentages_plot.png', use_column_width=True)
+            st.image('sums_percentages_plot.png',  use_container_width=True)
     
             plot_comparison(average_stats)
-            st.image('comparison.png', use_column_width=True)
+            st.image('comparison.png',  use_container_width=True)
     
             st.markdown("#### Who do we sense for?", unsafe_allow_html=True)
             st.write(comparison_df)
@@ -126,7 +126,7 @@ else:
     
         
         plot_counts(weighted_freq_cbs, ams_gdf)
-        st.image('counts_cbs.png', use_column_width=True)
+        st.image('counts_cbs.png',  use_container_width=True)
     
         # Add a description under the map
         st.markdown(
@@ -139,7 +139,7 @@ else:
         # Display initial map and ratios DataFrame
         st.subheader("")
         plot_ratios_comparison(ratios_df)
-        st.image('ratios.png', use_column_width=True)
+        st.image('ratios.png',  use_container_width=True)
     
          # Add a description under the graph
         st.markdown(
@@ -239,7 +239,7 @@ else:
         # Button to perform weighted frequency analysis and display results
         if st.button("Run Weighted Analysis"):
             plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
-            st.image('weights_cbs.png', use_column_width=True)
+            st.image('weights_cbs.png',  use_container_width=True)
             # Add a description under the map 2
             st.markdown(
             "<p style='color: grey; font-size: 12.5px;'>Weighted value per cell, calculated as the product of the number of measurements and the number of persons/units <br> categorized by a specific sociodemographic attribute on a given day.</p>",
@@ -249,7 +249,7 @@ else:
         # Button to perform index analysis and display results
         if st.button("Run Index Analysis"):
             plot_index_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
-            st.image('index_cbs.png', use_column_width=True)
+            st.image('index_cbs.png',  use_container_width=True)
             # Add a description under the map 2
             st.markdown(
             "<p style='color: grey; font-size: 12.5px;'>'Sensing Index' representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
