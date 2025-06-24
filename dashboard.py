@@ -183,14 +183,12 @@ else:
     #    # Normalize the weights after loading the frequencies
     #     normalized_gdf = normalize_weights_and_merge(weighted_freq_cbs, freq_cbs)
     
-    
-    
     # Assuming you have your Streamlit tab setup before this
     
     # Assuming you have your Streamlit tab setup before this
     with tab3:
     
-        st.markdown("based on real-time GTFS data, **GVB trams** & **buses** for **13th March 2024** in Amsterdam")
+        st.markdown("We appply several optimization in order to find the best limited vehicles (N) to place sensors on. These include among others -  spatial (maximal coverage), temporal (highest frequencies) and fairness (equal sociodemographics) optimizations."
     
         st.subheader("")
         # Define the mapping of user-friendly names to actual column names for index analysis
