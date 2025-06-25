@@ -56,7 +56,7 @@ else:
     st.title("Public Transport Sensing")
     
     # Use tabs instead of sidebar
-    tab1, tab2, tab3 = st.tabs(["**Spatial Analysis**", "**Frequencies**", "**Weights & Index**"])
+    tab1, tab2, tab3 = st.tabs(["**Spatial Analysis**", "**Frequencies**", "**Optimizations**"])
     
     with tab1:
         # User input for transport type
@@ -189,68 +189,69 @@ else:
     with tab3:
     
         st.markdown("We appply several optimization in order to find the best limited vehicles (N) to place sensors on. These include among others -  spatial (maximal coverage), temporal (highest frequencies) and fairness (equal sociodemographics) optimizations.")
+         st.markdown("***Coming Soon***")
     
-        st.subheader("")
+        #st.subheader("")
         # Define the mapping of user-friendly names to actual column names for index analysis
-        index_label_mapping = {
-            'Inhabitants': 'inhab_index',
-            'Age 0-15': '0_15_index',
-            'Age 15-25': '15_25_index',
-            'Age 25-45': '25_45_index',
-            'Age 45-65': '45_65_index',
-            'Age 65+': '65+_index',
-            'Housing Units': 'woning_index',
-            'Dutch': 'nederlan_index',
-            'West. Migration': 'west_mig_index',
-            'Non-West. Migration': 'n_west_m_index'
-        }
+        # index_label_mapping = {
+        #     'Inhabitants': 'inhab_index',
+        #     'Age 0-15': '0_15_index',
+        #     'Age 15-25': '15_25_index',
+        #     'Age 25-45': '25_45_index',
+        #     'Age 45-65': '45_65_index',
+        #     'Age 65+': '65+_index',
+        #     'Housing Units': 'woning_index',
+        #     'Dutch': 'nederlan_index',
+        #     'West. Migration': 'west_mig_index',
+        #     'Non-West. Migration': 'n_west_m_index'
+        # }
     
         # Define the mapping of user-friendly names to actual column names for weighted analysis
-        weighted_label_mapping = {
-            'Inhabitants': 'Weight_inhab',
-            'Age 0-15': 'Weight_0_15',
-            'Age 15-25': 'Weight_15_25',
-            'Age 25-45': 'Weight_25_45',
-            'Age 45-65': 'Weight_45_65',
-            'Age 65+': 'Weight_65+',
-            'Housing Units': 'Weight_woning',
-            'Dutch': 'Weight_nederlan',
-            'West. Migration': 'Weight_west_mig',
-            'Non-West. Migration': 'Weight_n_west_m'
-        }
+        # weighted_label_mapping = {
+        #     'Inhabitants': 'Weight_inhab',
+        #     'Age 0-15': 'Weight_0_15',
+        #     'Age 15-25': 'Weight_15_25',
+        #     'Age 25-45': 'Weight_25_45',
+        #     'Age 45-65': 'Weight_45_65',
+        #     'Age 65+': 'Weight_65+',
+        #     'Housing Units': 'Weight_woning',
+        #     'Dutch': 'Weight_nederlan',
+        #     'West. Migration': 'Weight_west_mig',
+        #     'Non-West. Migration': 'Weight_n_west_m'
+        # }
     
-        # Create options for the selectbox with user-friendly labels
-        options = list(index_label_mapping.keys())
+        # # Create options for the selectbox with user-friendly labels
+        # options = list(index_label_mapping.keys())
     
-        #st.subheader("Weights & Index for Sensing")
+        # #st.subheader("Weights & Index for Sensing")
     
-        # Select column to plot using the user-friendly names
-        #column_to_plot_label = st.radio("Select Attribute", options=options, index = 0)
-        # Add a unique key to the selectbox
-        column_to_plot_label = st.selectbox("Select Attribute", options=options)
+        # # Select column to plot using the user-friendly names
+        # #column_to_plot_label = st.radio("Select Attribute", options=options, index = 0)
+        # # Add a unique key to the selectbox
+        # column_to_plot_label = st.selectbox("Select Attribute", options=options)
     
-        # Get the actual column name for index analysis
-        column_to_plot_index = index_label_mapping[column_to_plot_label]
+        # # Get the actual column name for index analysis
+        # column_to_plot_index = index_label_mapping[column_to_plot_label]
         
-        # Get the actual column name for weighted analysis
-        column_to_plot_weighted = weighted_label_mapping[column_to_plot_label]
+        # # Get the actual column name for weighted analysis
+        # column_to_plot_weighted = weighted_label_mapping[column_to_plot_label]
     
-        # Button to perform weighted frequency analysis and display results
-        if st.button("Run Weighted Analysis"):
-            plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
-            st.image('weights_cbs.png',  use_container_width=True)
-            # Add a description under the map 2
-            st.markdown(
-            "<p style='color: grey; font-size: 12.5px;'>Weighted value per cell, calculated as the product of the number of measurements and the number of persons/units <br> categorized by a specific sociodemographic attribute on a given day.</p>",
-            unsafe_allow_html=True
-            )
+        # # Button to perform weighted frequency analysis and display results
+        # if st.button("Run Weighted Analysis"):
+        #     plot_weighted_column(weighted_freq_cbs, ams_gdf, column_to_plot_weighted)  # Use the normalized GeoDataFrame
+        #     st.image('weights_cbs.png',  use_container_width=True)
+        #     # Add a description under the map 2
+        #     st.markdown(
+        #     "<p style='color: grey; font-size: 12.5px;'>Weighted value per cell, calculated as the product of the number of measurements and the number of persons/units <br> categorized by a specific sociodemographic attribute on a given day.</p>",
+        #     unsafe_allow_html=True
+        #     )
     
-        # Button to perform index analysis and display results
-        if st.button("Run Index Analysis"):
-            plot_index_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
-            st.image('index_cbs.png',  use_container_width=True)
-            # Add a description under the map 2
-            st.markdown(
-            "<p style='color: grey; font-size: 12.5px;'>'Sensing Index' representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
-            unsafe_allow_html=True
-            )
+        # # Button to perform index analysis and display results
+        # if st.button("Run Index Analysis"):
+        #     plot_index_column(normalized_gdf, ams_gdf, column_to_plot_index)  # Use weighted_freq_cbs as input
+        #     st.image('index_cbs.png',  use_container_width=True)
+        #     # Add a description under the map 2
+        #     st.markdown(
+        #     "<p style='color: grey; font-size: 12.5px;'>'Sensing Index' representing sensing potential based on the number of persons/units and amount of measurements per cell</p>",
+        #     unsafe_allow_html=True
+        #     )
