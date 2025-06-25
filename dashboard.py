@@ -189,7 +189,7 @@ else:
     with tab3:
     
         st.markdown("We appply several optimization in order to find the best limited vehicles (N) to place sensors on. These include among others -  spatial (maximal coverage), temporal (highest frequencies) and fairness (equal sociodemographics) optimizations.")
-         st.markdown("***Coming Soon***")
+        st.markdown("***Coming Soon***")
     
         #st.subheader("")
         # Define the mapping of user-friendly names to actual column names for index analysis
